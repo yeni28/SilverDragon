@@ -11,6 +11,11 @@
         <span class="detail_title"> {{movie_detail?.title}} </span>
         <!-- 코멘트 -->
         <form @submit.prevent="movieComment(movie_detail?.id)">
+
+            <div @mouseleave="showCurrentRating(0)" style="display:inline-block;">
+                    <star-rating :show-rating="false" @current-rating="showCurrentRating" @rating-selected="setCurrentSelectedRating" :increment="0.5"></star-rating>
+            </div>
+            <div style="margin-top:10px;font-weight:bold;">{{currentRating}}</div>
             <input type="text" v-model="movie_comment">
         </form>
 
@@ -25,6 +30,7 @@
 
 <script>
 import axios from 'axios'
+import StarRating from 'vue-star-rating'
 
 export default {
     name: 'MovieDetailView',
@@ -32,7 +38,14 @@ export default {
         return{
             movie_detail: null,
             movie_comment:null,
+            currentRating: null,
+            currentSelectedRating: null,
+            rate: null,
+
         }
+    },
+    components: {
+    StarRating
     },
     methods:{
         getMovieDetail(movie_pk){
@@ -50,7 +63,8 @@ export default {
                 method:'post',
                 url:`http://127.0.0.1:8000/movies/${movie_pk}/comment/`,
                 data:{
-                    comment : this.movie_comment
+                    'comment' : this.movie_comment,
+                    'rate' : this.rate
                 },
                 headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
             })
@@ -61,6 +75,17 @@ export default {
                 console.log(err)
             })
             
+        },
+        // 별점
+        setRating: function(rating) {
+            this.rating = rating;
+        },
+        showCurrentRating: function(rating) {
+            this.currentRating = (rating === 0) ? this.currentSelectedRating : rating * 2 + "점"
+        },
+        setCurrentSelectedRating: function(rating) {
+            this.currentSelectedRating = rating * 2 + "점";
+            this.rate = rating * 2
         }
     },
     created(){
@@ -99,8 +124,6 @@ export default {
     width:500px;
     background-color:transparent;
     margin-left: 10%;
-
-
 }
 
 </style>
