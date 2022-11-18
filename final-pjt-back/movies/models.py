@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 # Create your models here.
 class Genre(models.Model):
@@ -31,6 +33,7 @@ class Movie(models.Model):
 class MovieComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='user', on_delete=models.CASCADE )
     comment = models.TextField()
+    rate = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     movie = models.ForeignKey(Movie, related_name='comment', on_delete=models.CASCADE, null=True)
     # commentcomment = models.ForeignKey('self', related_name='comment_comment', on_delete=models.CASCADE, null=True)
 
