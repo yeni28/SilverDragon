@@ -3,6 +3,7 @@
 
     <div class="detail">
     <div>
+        <h1>{{ movie_detail?.id }}</h1>
     <img class="backdropimg"  :src="`https://image.tmdb.org/t/p/original${movie_detail?.backdrop_path}`" alt="">
     </div>
 
@@ -10,7 +11,7 @@
         <img class="poseterimg"  :src="`https://image.tmdb.org/t/p/original${movie_detail?.poster_path}`" alt="">
         <span class="detail_title"> {{movie_detail?.title}} </span>
         <!-- 코멘트 -->
-        <form @submit.prevent="movieComment(movie_detail.id)">
+        <form @submit.prevent="movieComment(movie_detail?.id)">
             <input type="text" v-model="movie_comment">
         </form>
 
@@ -49,10 +50,10 @@ export default {
             axios({
                 method:'post',
                 url:`http://127.0.0.1:8000/movies/${movie_pk}/comment/`,
-                headers:localStorage.getItem('jwt'),
                 data:{
                     comment : this.movie_comment
-                }
+                },
+                headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
             })
             .then((res)=>{
                 console.log(res)

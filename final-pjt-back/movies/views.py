@@ -42,9 +42,9 @@ def movie_comment(request, movie_pk):
     elif request.method == 'POST':
         if request.user.is_authenticated:
             serializer = MovieCommentSerializer(data=request.data)
-
+            moviec = get_object_or_404(Movie, pk=movie_pk)
             if serializer.is_valid(raise_exception=True):
-                serializer.save(user=request.user, movie=movie_pk)
+                serializer.save(user=request.user, movie=moviec)
                 return Response(serializer.data)
 
 

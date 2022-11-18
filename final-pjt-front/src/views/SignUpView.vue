@@ -26,15 +26,6 @@
       />
       <input type="submit" value="SignUp" />
     </form>
-
-    <!-- 사인업 -->
-    <hr>
-    <br>
-    
-
-
-
-
   </div>
 </template>
 
