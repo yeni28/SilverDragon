@@ -33,7 +33,7 @@ class Movie(models.Model):
 class MovieComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='user', on_delete=models.CASCADE )
     comment = models.TextField()
-    rate = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    rate = models.FloatField(validators=[MinValueValidator(0.5), MaxValueValidator(5)])
     movie = models.ForeignKey(Movie, related_name='comment', on_delete=models.CASCADE, null=True)
     # commentcomment = models.ForeignKey('self', related_name='comment_comment', on_delete=models.CASCADE, null=True)
 

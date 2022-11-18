@@ -56,6 +56,14 @@ class MovieCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = MovieComment
         fields = "__all__"
+class MovieCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    movie = MovieSerializer(read_only=True)
+    replymoviecomment = ReflyCommentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = MovieComment
+        fields = "__all__"
 
 
 
