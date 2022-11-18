@@ -3,7 +3,6 @@
 
     <div class="detail">
     <div>
-        <h1>{{ movie_detail?.id }}</h1>
     <img class="backdropimg"  :src="`https://image.tmdb.org/t/p/original${movie_detail?.backdrop_path}`" alt="">
     </div>
 
