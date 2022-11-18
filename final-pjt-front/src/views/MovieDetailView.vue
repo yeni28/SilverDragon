@@ -10,7 +10,7 @@
         <img class="poseterimg"  :src="`https://image.tmdb.org/t/p/original${movie_detail?.poster_path}`" alt="">
         <span class="detail_title"> {{movie_detail?.title}} </span>
         <!-- 코멘트 -->
-        <form @submit.prevent="movieComment">
+        <form @submit.prevent="movieComment(movie_detail.id)">
             <input type="text" v-model="movie_comment">
         </form>
 
