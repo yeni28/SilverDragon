@@ -15,6 +15,9 @@ class Director(models.Model):
     name = models.CharField(max_length=50)
     profile_path = models.CharField(max_length=100, null=True)
 
+class Relatemovie(models.Model):
+    title = models.CharField(max_length=100)
+    poster_path = models.CharField(max_length=200, null=True)
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
@@ -28,6 +31,9 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre)
     actor = models.ManyToManyField(Actor)
     director = models.ManyToManyField(Director)
+    relate_movie = models.ManyToManyField(Relatemovie)
+
+
     
 
 class MovieComment(models.Model):

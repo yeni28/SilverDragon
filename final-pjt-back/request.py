@@ -24,6 +24,10 @@ actor_pk_list = []
 # 감독 json
 director_json_data = []
 director_pk_list = []
+# 연관 영화 json
+re_movie_data = []
+re_movie_pk_list = []
+
 
 
 for i in range(1,4):
@@ -39,12 +43,13 @@ for i in range(1,4):
         response_crew = requests.get(movie_crew_path)
         crew_data = response_crew.json()
         
-        # 감독 데이터와 배우데이터를 너을 리스트
+        # 감독 데이터와 배우데이터 관계 영화 너을 리스트
         director_movie = []
         actor_movie = []
+        relate_movie = []
         # 배우 데이터 만들기
-        if len(crew_data["cast"]) >= 3:
-            for n in range(3):
+        for n in range(3):
+            try:
                 cast = crew_data["cast"][n]
                 # movie의 actor필드에 너을 것을 더해줌
                 actor_movie.append(cast["id"])
@@ -63,7 +68,9 @@ for i in range(1,4):
                             "profile_path" : cast["profile_path"]
                         }
                     })
-            
+            except:
+                break
+        
 
         # 감독 데이터 만들기
         crews = crew_data["crew"]
@@ -87,6 +94,32 @@ for i in range(1,4):
 
                 break
 
+        
+        # 연관 추천 영화 구하기 
+        re_movie_path = f'https://api.themoviedb.org/3/movie/{movie["id"]}/recommendations?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR&page=1'
+        re_movie = requests.get(re_movie_path)
+        re_movie_json = re_movie.json()
+
+
+        for nums in range(3):
+            try:
+                rmovie = re_movie_json['results'][nums]
+                relate_movie.append(rmovie['id'])
+                if rmovie['id'] not in re_movie_pk_list:
+                    re_movie_pk_list.append(rmovie['id'])
+                    re_movie_data.append({
+                        "model" : "movies.relatemovie",
+                        "pk" : rmovie["id"],
+                        "fields" : {
+                            "title" : rmovie["title"],
+                            "poster_path" : rmovie["poster_path"]
+                        },
+                    })
+                else:
+                    continue
+            except:
+                break
+
 
 
         # 무비 json 구하기
@@ -105,6 +138,7 @@ for i in range(1,4):
                 "genres" : movie["genre_ids"],
                 "actor" : actor_movie,
                 "director" : director_movie,
+                "relate_movie" : relate_movie,
             }
         })
 
@@ -126,7 +160,13 @@ file_path_director = './movies/fixtures/director.json'
 with open(file_path_director, 'w') as file_director:
     json.dump(director_json_data, file_director, indent=4)
 
+# relatemovie json 파일 쓰기
+file_path_removie = './movies/fixtures/removie.json'
 
+# print(re_movie_data)
+
+with open(file_path_removie, 'w') as file_removie:
+    json.dump(re_movie_data, file_removie, indent=4)
 
 # 장르json 작성
 
