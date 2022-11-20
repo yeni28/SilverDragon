@@ -62,7 +62,7 @@ def searchmovie(request, movie_title):
         data = {
             'title': movie_title,
         }
-
+        # 쿼리 셋 유니온 기능 활용하기.
         # subject = Movie.objects.all().filter(title__contains=movie_title)
         subject = Movie.objects.all().filter(title__contains=movie_title)
         print(subject)
