@@ -56,6 +56,7 @@ class MovieCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = MovieComment
         fields = "__all__"
+
 class MovieCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     movie = MovieSerializer(read_only=True)
@@ -66,6 +67,13 @@ class MovieCommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ReMovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Relatemovie
+        fields = "__all__"
+
+
+
 
 
 # 영화 상세정보
@@ -74,6 +82,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     actor = ActorSerializer(many=True)
     director = DirectorSerializer(many=True)
     comment = MovieCommentSerializer(many=True)
+    relate_movie = ReMovieSerializer(many=True)
 
     class Meta:
         model = Movie
