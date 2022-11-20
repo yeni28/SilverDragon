@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:movie_pk>/', views.movie_detail),
     path('<int:movie_pk>/comment/', views.movie_comment),
     path('<int:movie_pk>/comment/<int:comment_pk>/', views.replycomment),
+    path('search/<str:movie_title>/', views.searchmovie),
 ]

@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
+
 
 from .serializers import *
 from .models import *
@@ -53,3 +55,16 @@ def replycomment(request, movie_pk, comment_pk):
     if request.method =='GET':
         reply = CommentReply.objects.filter()
         pass
+
+@api_view(['GET','POST'])
+def searchmovie(request, movie_title):
+    if request.method == 'GET':
+        data = {
+            'title': movie_title,
+        }
+
+        # subject = Movie.objects.all().filter(title__contains=movie_title)
+        subject = Movie.objects.all().filter(title__contains=movie_title)
+        print(subject)
+        serializer = MovieDetailSerializer(subject, many=True)
+        return Response(serializer.data)
