@@ -30,6 +30,7 @@ export default {
   methods: {
     islogin() {
       this.$store.commit("logins");
+      this.$store.dispatch("movie_list_create")
     },
     
   },

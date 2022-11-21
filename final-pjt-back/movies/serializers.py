@@ -90,7 +90,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
 
 
 class LikeMovieListSerializer(serializers.ModelSerializer):
-    movies =MovieDetailSerializer(many=True, read_only=True)
+    movies = MovieDetailSerializer(many=True, read_only=True)
     user = UserSerializer(read_only=True)
 
     class Meta:

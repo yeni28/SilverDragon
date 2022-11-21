@@ -16,7 +16,7 @@ import random
 def home_movies(request):
     if request.method == 'GET':
         movies = Movie.objects.all().order_by('?')[:4]
-        
+
         serializer = HomeMovieSerializer(movies, many=True)
         return Response(serializer.data)
         
@@ -28,8 +28,6 @@ def movie_detail(request, movie_pk):
         serializer = MovieDetailSerializer(movie)
         actor = movie.actor.all()
         genre = movie.genres.all()
-        print(actor)
-        print(genre)
         return Response(serializer.data)
 
 
@@ -49,13 +47,6 @@ def movie_comment(request, movie_pk):
                 serializer.save(user=request.user, movie=moviec)
                 return Response(serializer.data)
 
-
-@api_view(['GET','POST'])
-def replycomment(request, movie_pk, comment_pk):
-    if request.method =='GET':
-        reply = CommentReply.objects.filter()
-        pass
-
 @api_view(['GET','POST'])
 def searchmovie(request, movie_title):
     if request.method == 'GET':
@@ -65,6 +56,40 @@ def searchmovie(request, movie_title):
         # 쿼리 셋 유니온 기능 활용하기.
         # subject = Movie.objects.all().filter(title__contains=movie_title)
         subject = Movie.objects.all().filter(title__contains=movie_title)
-        print(subject)
         serializer = MovieDetailSerializer(subject, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+def likemovie(request):
+    if request.method == 'GET':
+        movie_list = LikeMovieList.objects.filter(user=request.user.id)
+        serializer = LikeMovieListSerializer(movie_list, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def likemovienew(request, movie_pk):
+    if request.method == 'POST':
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        serializer = LikeMovieListSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, movies=movie)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def likemoviecreate(request, movie_pk, list_pk):
+    if request.method == 'POST':
+        movie = Movie.objects.get(pk=movie_pk)
+        LikeMovieList.objects.get(pk=list_pk).movies.add(movie)
+        serializer = LikeMovieListSerializer(movie)
+        print(serializer.data)
+        return Response(serializer.data)
+
+        # except:
+        #     movie = get_object_or_404(Movie, pk=movie_pk)
+        #     serializer = LikeMovieListSerializer(data=request.data)
+        #     if serializer.is_valid(raise_exception=True):
+        #         serializer.save(user=request.user, movies=movie)
+        #     return Response(serializer.data)

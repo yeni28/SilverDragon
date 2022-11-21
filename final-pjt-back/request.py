@@ -6,8 +6,8 @@ import json
 # 장르 url
 # https://api.themoviedb.org/3/genre/movie/list?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR
 
-response = requests.get("https://api.themoviedb.org/3/genre/movie/list?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR")
-movie_popular_response =requests.get('https://api.themoviedb.org/3/movie/popular?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR&page=1')
+# response = requests.get("https://api.themoviedb.org/3/genre/movie/list?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR")
+# movie_popular_response =requests.get('https://api.themoviedb.org/3/movie/popular?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR&page=1')
 # print(movie_popular_response.json()['results']['id'])
 
 
@@ -27,16 +27,24 @@ director_pk_list = []
 # 연관 영화 json
 re_movie_data = []
 re_movie_pk_list = []
+# keyword
+keyword_list = set()
 
 
-
-for i in range(1,10):
+for i in range(1,30):
     urls = f'https://api.themoviedb.org/3/movie/popular?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR&page={i}'
 
     datas = requests.get(urls)
     movie_data = datas.json()
 
     for movie in movie_data['results']:
+        # keyword 구하기
+        keword_urls = f'https://api.themoviedb.org/3/movie/{movie["id"]}/keywords?api_key=6f6513726d3b3eef83b5927098909d71'
+        respons_key = requests.get(keword_urls)
+        key_data = respons_key.json()
+        keyword_data = key_data["keywords"]
+        for keyw in keyword_data:
+            keyword_list.add(keyw["name"])
 
         # 가져온 movie["id"]로 crew 구하기
         movie_crew_path = f'https://api.themoviedb.org/3/movie/{movie["id"]}/credits?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR'
@@ -168,26 +176,32 @@ file_path_removie = './movies/fixtures/removie.json'
 with open(file_path_removie, 'w') as file_removie:
     json.dump(re_movie_data, file_removie, indent=4)
 
-# 장르json 작성
 
-file_path = './movies/fixtures/genre.json'
-data = response.json()["genres"]
-
-js_data = []
-
-for gen in data:
-    js_data.append({
-        "model" :  "movies.genre",
-        "pk" : gen["id"],
-        "fields" : {
-            "name" : gen["name"]
-        }
-    })
+print(keyword_list)
+print('-----------------------------------------')
+print(len(keyword_list))
 
 
-with open(file_path, 'w') as file:
-    json.dump(js_data, file, indent=4)
-    # json.dump(js_data, file, ensure_ascii=False)
+# # 장르json 작성
+
+# file_path = './movies/fixtures/genre.json'
+# data = response.json()["genres"]
+
+# js_data = []
+
+# for gen in data:
+#     js_data.append({
+#         "model" :  "movies.genre",
+#         "pk" : gen["id"],
+#         "fields" : {
+#             "name" : gen["name"]
+#         }
+#     })
+
+
+# with open(file_path, 'w') as file:
+#     json.dump(js_data, file, indent=4)
+#     # json.dump(js_data, file, ensure_ascii=False)
 
 
     
