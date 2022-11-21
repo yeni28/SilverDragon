@@ -233,7 +233,7 @@ export default {
     justify-content: right;
     align-items: center;
     font-size: 100px;
-    mask-image: linear-gradient(to top, transparent 5%, black 50%);
+    mask-image: linear-gradient(to top, transparent 5%, black 30%);
 
   }
   .slides img {
@@ -241,8 +241,8 @@ export default {
   height: 100%;
   justify-content: right;
   object-fit: cover;
-  -webkit-mask-image: linear-gradient(to right, transparent 5%, black 100%);
-  mask-image: linear-gradient(to right, transparent 5%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 5%, black 90%);
+  mask-image: linear-gradient(to right, transparent 5%, black 90%);
 
 } 
 

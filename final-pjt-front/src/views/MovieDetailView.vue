@@ -126,8 +126,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Movie Comments</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-family: NeoLT;">✒️Movie Comments</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white;"></button>
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="movieComment(movie_detail?.id)">
@@ -140,28 +140,28 @@
                                 :star-size="30"
                                 :show-rating="false" @current-rating="showCurrentRating" @rating-selected="setCurrentSelectedRating" :increment="0.5"></star-rating>
                                 </div>
-                                <span style="margin-left:1rem;">{{currentRating}}</span>
+                                <span style="margin-left:1rem; font-family: NeoLT; ">{{currentRating}}</span>
                                 <div>
-                                <label  for="recipient-name" class="col-form-label" style="font-family: NeoLT;" >별점을 선택하세요</label> <br>
+                                <label  for="recipient-name" class="col-form-label" style="font-family: NeoLT; color: lightgray;" >별점을 선택하세요</label> <br>
                                 </div>
                         </div>
                         <hr>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label"></label>
-                            <textarea class="form-control" id="message-text" style="font-family: NeoRG;" placeholder="감상평/기대평을 작성해주세요" v-model="movie_comment" ></textarea>
+                            <textarea class="form-control" id="message-text" style="font-family: NeoRG;" placeholder="댓글을 작성해주세요" v-model="movie_comment" ></textarea>
                         </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        <button type="submit" class="btn btn-primary" style="font-family: NeoLT;" @click="movieComment(movie_detail?.id)">작성</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-family: NeoBD; border-radius:1rem;">닫기</button>
+                        <button type="submit" class="btn btn-primary" style="font-family: NeoBD;border-radius:1rem;" @click="movieComment(movie_detail?.id)">작성</button>
                     </div>
                     </div>
                 </div>
                 </div>
                 </div>
                     
-                
+                <!-- 좋아요 버튼  -->
             </div>
 
         </div>
@@ -182,6 +182,9 @@
         </div>
 
     </div>
+    <!-- 재생목록 추가 예정 -->
+
+
 
     <!-- 댓글 확인란-->
     <div id="comments" class="comment_box">

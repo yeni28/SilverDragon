@@ -3,7 +3,7 @@
     <nav>
       <router-link to="/">메인</router-link> |
       <router-link to="/recommand">영화 추천</router-link> |
-      <router-link to="/about">마이페이지</router-link> |
+      <router-link to="/mypage">마이페이지</router-link> |
       <input class="searchbar" type="text" placeholder="search bar" v-model="searchinput" @input="search_movie"/> |
       
       <span :class="{ dinone: is_logined }">
