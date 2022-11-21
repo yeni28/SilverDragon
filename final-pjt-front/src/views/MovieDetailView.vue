@@ -71,7 +71,7 @@
                                 <img
                                 v-if="movie_detail.director[0].profile_path"
                                 class="d_profile_img" 
-                                :src="`https://image.tmdb.org/t/p/original${movie_detail.director[0].profile_path}`" alt="">
+                                :src="`https://image.tmdb.org/t/p/original${movie_detail.director[0]?.profile_path}`" alt="">
                                 <img 
                                 v-else
                                 src="../assets/none-profile.png"
@@ -90,7 +90,7 @@
                         <div v-for="actor in movie_detail.actor" :key="actor.id" class="profile">
                             <div class="profile_box">
                                 <img
-                                v-if="actor.profile_path"
+                                v-if="actor?.profile_path"
                                 class="profile_img" 
                                 :src="`https://image.tmdb.org/t/p/original${actor?.profile_path}`" alt="">
                                 <img 
@@ -99,7 +99,7 @@
                                 class="profile_img">
                             </div>
                             <div class="profile_name">
-                            {{actor.name}}    
+                            {{actor?.name}}    
                             </div>
                         </div>
                     </div>
@@ -109,16 +109,61 @@
 
             <!-- 사이드 바 -->
             <div class="sidebar">
-                 <div>
+                <!-- 영상보기 -->
+                <div>
                     <a href="#" title="Button border orange" class="button btnFloat_trailer btnOrange"></a>
-                 </div>
-                 <div>
+                </div>
+                <!-- 댓글 보기 -->
+                <div>
                     <a href="#comments" title="Button border orange" class="button btnFloat_comment btnOrange"></a>
                     <!-- <button onclick="location.href='#comments'"> 댓글 보기 </button> -->
-                 </div>
+                </div>
+                <!-- 댓글 작성 -->
+                <!-- 코멘트 모달 테스트 -->
+                <div style="background:transparent;">
+                <button type="button" class="button btn_write" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">🖊️댓글 작성</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Movie Comments</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="movieComment(movie_detail?.id)">
+                        <div style="font-family:NeoBD; font-size:2rem; margin-bottom:1rem;">
+                            {{movie_detail?.title}}
+                        </div>
+                        <div class="mb-3">
+                                <div @mouseleave="showCurrentRating(0)" style="display:inline-block;">
+                                <star-rating 
+                                :star-size="30"
+                                :show-rating="false" @current-rating="showCurrentRating" @rating-selected="setCurrentSelectedRating" :increment="0.5"></star-rating>
+                                </div>
+                                <span style="margin-left:1rem;">{{currentRating}}</span>
+                                <div>
+                                <label  for="recipient-name" class="col-form-label" style="font-family: NeoLT;" >별점을 선택하세요</label> <br>
+                                </div>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label"></label>
+                            <textarea class="form-control" id="message-text" style="font-family: NeoRG;" placeholder="감상평/기대평을 작성해주세요" v-model="movie_comment" ></textarea>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <button type="submit" class="btn btn-primary" style="font-family: NeoLT;" @click="movieComment(movie_detail?.id)">작성</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                    
+                
             </div>
 
-           
         </div>
         <!-- 비슷한 영화 -->
         <div>
@@ -135,75 +180,19 @@
                     </div>
             </div>
         </div>
-            
 
+    </div>
 
-        <!-- 코멘트 -->
-        <!-- <h3>댓글 작성</h3>
-        <form @submit.prevent="movieComment(movie_detail?.id)">
-
-            <div @mouseleave="showCurrentRating(0)" style="display:inline-block;">
-                <star-rating 
-                :star-size="20"
-                :show-rating="false" @current-rating="showCurrentRating" @rating-selected="setCurrentSelectedRating" :increment="0.5"></star-rating>
-            </div>
-            <div style="margin-top:10px;font-weight:bold;">{{currentRating}}</div>
-            <input type="text" v-model="movie_comment">
-        </form>
-         -->
-
-        <!-- 코멘트 모달 테스트 -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"> 댓글 작성</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Movie Comments</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form @submit.prevent="movieComment(movie_detail?.id)">
-                <div style="font-family:NeoBD; font-size:2rem; margin-bottom:1rem;">
-                    {{movie_detail?.title}}
-                </div>
-                <div class="mb-3">
-                        <div @mouseleave="showCurrentRating(0)" style="display:inline-block;">
-                        <star-rating 
-                        :star-size="30"
-                        :show-rating="false" @current-rating="showCurrentRating" @rating-selected="setCurrentSelectedRating" :increment="0.5"></star-rating>
-                        </div>
-                        <span style="margin-left:1rem;">{{currentRating}}</span>
-                        <div>
-                        <label  for="recipient-name" class="col-form-label" style="font-family: NeoLT;" >별점을 선택하세요</label> <br>
-                        </div>
-                </div>
-                <hr>
-                <div class="mb-3">
-                    <label for="message-text" class="col-form-label"></label>
-                    <textarea class="form-control" id="message-text" style="font-family: NeoRG;" placeholder="감상평/기대평을 작성해주세요" v-model="movie_comment" ></textarea>
-                </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="submit" class="btn btn-primary" style="font-family: NeoLT;" @click="movieComment(movie_detail?.id)">댓글 작성</button>
-            </div>
-            </div>
-        </div>
-        </div>
-
-
-        </div>
-        <!-- 댓글 확인란-->
-        <div id="comments" class="comment_box">
-            <hr>
-            <p style="font-family:NeoBD; font-size:1.5rem;"> 영화 감상평 </p>
-            <hr>
+    <!-- 댓글 확인란-->
+    <div id="comments" class="comment_box">
+        <hr>
+        <p style="font-family:NeoBD; font-size:1.5rem;"> 영화 감상평 </p>
+        <hr>
+        <div>
             <div 
             v-for="comment in movie_detail.comment"
             :key="comment.id"
             >
-            
             <div class="comment_user">
                 {{comment.user.username}}
                 <span><star-rating  :inline="true" :rating="comment.rate" :read-only="true" :increment="0.01" :star-size="10" :show-rating="false"></star-rating></span>
@@ -212,11 +201,9 @@
             {{comment.comment}}     
             </span>
             </div>
-
-
-
-  </div>
-
+        </div>    
+    </div>
+    
 </div>
 </template>
 
@@ -245,7 +232,7 @@ export default {
         getMovieDetail(movie_pk){
             axios({
                 method:'get',
-                url:`http://127.0.0.1:8000/movies/${movie_pk}`,
+                url:`http://127.0.0.1:8000/movies/${movie_pk}/`,
             })
             .then((res)=>{
                 this.movie_detail= res.data
@@ -262,13 +249,39 @@ export default {
                 },
                 headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
             })
-            .then((res)=>{
-                console.log(res)
+            .then(()=>{
+                this.getMovieDetail(movie_pk)
+                this.movie_comment = null
+                this.currentSelectedRating = null
+                this.rate = null
+                this.currentRating = null
             })
             .catch((err)=>{
                 console.log(err)
             })
-            
+        },
+        deleteComment(movie_pk) {
+            axios({
+                method:'delete',
+                url:`http://127.0.0.1:8000/movies/${movie_pk}/comment/`,
+                data:{
+                    'comment' : this.movie_comment,
+                    'rate' : this.rate
+                },
+                headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+            })
+        },
+        updateComment(movie_pk){
+            axios({
+                method:'put',
+                url:`http://127.0.0.1:8000/movies/${movie_pk}/comment/`,
+                data:{
+                    'comment' : this.movie_comment,
+                    'rate' : this.rate
+                },
+                headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+
+            })
         },
         // 별점
         setRating: function(rating) {
@@ -577,7 +590,6 @@ a.button {
   border-radius: 2rem;
   transition: all 0.2s ;
   background-color:#3b3b3b;
-
 }
 .btnFloat_trailer:before {
   content: '🎬 영상 보기';
@@ -592,8 +604,8 @@ a.button {
   transition: all 0.2s ;
   /* border: 2px solid #585858; */
   background-color:#3b3b3b;
-
 }
+
 
 .btnOrange.btnFloat:before {
   background:transparent;
@@ -625,5 +637,29 @@ a.button {
   box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
 }
 
+.btn_write{
+  width: 120px;
+  height: 50px;
+  border-radius: 2rem;
+  background-color:#3b3b3b;
+  margin-top: 2rem;
+  border:none;
+  color: #FFF;
+  font-family: NeoBD;
+
+}
+
+
+.btn_write:hover{
+  background-color:#f1a10d;
+  color: #FFF;
+  margin-left: 0px;
+  transform: scale(0.1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ;
+
+}
 
 </style>
