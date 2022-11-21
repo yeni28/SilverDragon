@@ -139,7 +139,7 @@
 
 
         <!-- 코멘트 -->
-        <h3>댓글 작성</h3>
+        <!-- <h3>댓글 작성</h3>
         <form @submit.prevent="movieComment(movie_detail?.id)">
 
             <div @mouseleave="showCurrentRating(0)" style="display:inline-block;">
@@ -150,7 +150,8 @@
             <div style="margin-top:10px;font-weight:bold;">{{currentRating}}</div>
             <input type="text" v-model="movie_comment">
         </form>
-        
+         -->
+
         <!-- 코멘트 모달 테스트 -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"> 댓글 작성</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -173,19 +174,19 @@
                         </div>
                         <span style="margin-left:1rem;">{{currentRating}}</span>
                         <div>
-                        <label  for="recipient-name" class="col-form-label">별점을 선택하세요</label> <br>
+                        <label  for="recipient-name" class="col-form-label" style="font-family: NeoLT;" >별점을 선택하세요</label> <br>
                         </div>
                 </div>
                 <hr>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"></label>
-                    <textarea class="form-control" id="message-text" placeholder="감상평/기대평을 작성해주세요" v-model="movie_comment" ></textarea>
+                    <textarea class="form-control" id="message-text" style="font-family: NeoRG;" placeholder="감상평/기대평을 작성해주세요" v-model="movie_comment" ></textarea>
                 </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="submit" class="btn btn-primary" >댓글 작성</button>
+                <button type="submit" class="btn btn-primary" style="font-family: NeoLT;" @click="movieComment(movie_detail?.id)">댓글 작성</button>
             </div>
             </div>
         </div>
@@ -202,12 +203,11 @@
             v-for="comment in movie_detail.comment"
             :key="comment.id"
             >
-            <span><star-rating  :inline="true" :rating="comment.rate/2" :read-only="true" :increment="0.01" :star-size="20" :show-rating="false"></star-rating>{{ comment.rate }}</span>
-
+            
             <div class="comment_user">
-            {{comment.user.username}}
+                {{comment.user.username}}
+                <span><star-rating  :inline="true" :rating="comment.rate" :read-only="true" :increment="0.01" :star-size="10" :show-rating="false"></star-rating></span>
             </div>
-            <br>
             <span class="comment_content">
             {{comment.comment}}     
             </span>
@@ -275,11 +275,11 @@ export default {
             this.rating = rating;
         },
         showCurrentRating: function(rating) {
-            this.currentRating = (rating === 0) ? this.currentSelectedRating : rating * 2 + "점"
+            this.currentRating = (rating === 0) ? this.currentSelectedRating : rating 
         },
         setCurrentSelectedRating: function(rating) {
-            this.currentSelectedRating = rating * 2 + "점";
-            this.rate = rating * 2
+            this.currentSelectedRating = rating ;
+            this.rate = rating
         }
     },
     created(){
@@ -476,8 +476,11 @@ export default {
 }
 
 .comment_user{
-    font-family: NeoLT;
+    font-family: PreR;
+}
 
+.comment_content{
+    font-family: NeoLT;
 }
 
 
