@@ -41,6 +41,14 @@
     },
     {
         "model": "movies.director",
+        "pk": 53348,
+        "fields": {
+            "name": "Petr J\u00e1kl",
+            "profile_path": "/8zi7MXdHXWBIP6IuMFZB1HdWnGX.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
         "pk": 1074721,
         "fields": {
             "name": "Enrique Gato",
@@ -57,17 +65,9 @@
     },
     {
         "model": "movies.director",
-        "pk": 53348,
+        "pk": 1188208,
         "fields": {
-            "name": "Petr J\u00e1kl",
-            "profile_path": "/8zi7MXdHXWBIP6IuMFZB1HdWnGX.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 964826,
-        "fields": {
-            "name": "Chava Cartas",
+            "name": "Guillaume Pierret",
             "profile_path": null
         }
     },
@@ -97,9 +97,9 @@
     },
     {
         "model": "movies.director",
-        "pk": 1188208,
+        "pk": 964826,
         "fields": {
-            "name": "Guillaume Pierret",
+            "name": "Chava Cartas",
             "profile_path": null
         }
     },
@@ -129,18 +129,10 @@
     },
     {
         "model": "movies.director",
-        "pk": 62768,
+        "pk": 1181315,
         "fields": {
-            "name": "William Brent Bell",
-            "profile_path": "/f7BvvN72ZhESBQ7wrCVw8M4D9by.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 61703,
-        "fields": {
-            "name": "Ron Yuan",
-            "profile_path": "/7Co2MdR8T5zlXTrdZ9Z3qjlmKdV.jpg"
+            "name": "Paul Leyden",
+            "profile_path": "/e3tTOMbqCNtY9k7QFPQLDi5iARj.jpg"
         }
     },
     {
@@ -153,10 +145,18 @@
     },
     {
         "model": "movies.director",
-        "pk": 62079,
+        "pk": 61703,
         "fields": {
-            "name": "Janeen Damian",
-            "profile_path": null
+            "name": "Ron Yuan",
+            "profile_path": "/7Co2MdR8T5zlXTrdZ9Z3qjlmKdV.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 62768,
+        "fields": {
+            "name": "William Brent Bell",
+            "profile_path": "/f7BvvN72ZhESBQ7wrCVw8M4D9by.jpg"
         }
     },
     {
@@ -169,14 +169,6 @@
     },
     {
         "model": "movies.director",
-        "pk": 1657527,
-        "fields": {
-            "name": "Agustina San Mart\u00edn",
-            "profile_path": "/sZxcJ3WgsFOaCzHfoX7dqkgobIq.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
         "pk": 29214,
         "fields": {
             "name": "Anne Fletcher",
@@ -185,18 +177,10 @@
     },
     {
         "model": "movies.director",
-        "pk": 1293994,
+        "pk": 1657527,
         "fields": {
-            "name": "Jon Watts",
-            "profile_path": "/fkXChMX6CUXY1yOxBehAzvaTCl7.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 1282094,
-        "fields": {
-            "name": "Annemarie van de Mond",
-            "profile_path": null
+            "name": "Agustina San Mart\u00edn",
+            "profile_path": "/sZxcJ3WgsFOaCzHfoX7dqkgobIq.jpg"
         }
     },
     {
@@ -217,10 +201,34 @@
     },
     {
         "model": "movies.director",
+        "pk": 26713,
+        "fields": {
+            "name": "Chuck Russell",
+            "profile_path": "/vppcXI2uPEfsBK7vHEXJVrSuup1.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 930707,
+        "fields": {
+            "name": "Colin Trevorrow",
+            "profile_path": "/i0HBClPMPKn3aq8QeQqyThS67EK.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
         "pk": 116805,
         "fields": {
             "name": "Paul Feig",
             "profile_path": "/lcD0BkGKWKynUwtPSEDLAsFdIJX.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 62079,
+        "fields": {
+            "name": "Janeen Damian",
+            "profile_path": null
         }
     },
     {
@@ -241,33 +249,17 @@
     },
     {
         "model": "movies.director",
-        "pk": 930707,
+        "pk": 1293994,
         "fields": {
-            "name": "Colin Trevorrow",
-            "profile_path": "/i0HBClPMPKn3aq8QeQqyThS67EK.jpg"
+            "name": "Jon Watts",
+            "profile_path": "/fkXChMX6CUXY1yOxBehAzvaTCl7.jpg"
         }
     },
     {
         "model": "movies.director",
-        "pk": 93364,
+        "pk": 70103,
         "fields": {
-            "name": "Jeff Fowler",
-            "profile_path": "/wExdubFgeBkEUP8MojKPKoOcgdZ.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 3183304,
-        "fields": {
-            "name": "Serik Beyseu",
-            "profile_path": null
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 3744992,
-        "fields": {
-            "name": "Fabian Medea",
+            "name": "Fumihiko Sori",
             "profile_path": null
         }
     },
@@ -281,9 +273,17 @@
     },
     {
         "model": "movies.director",
-        "pk": 70103,
+        "pk": 1458309,
         "fields": {
-            "name": "Fumihiko Sori",
+            "name": "Nicholas Peterson",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1282094,
+        "fields": {
+            "name": "Annemarie van de Mond",
             "profile_path": null
         }
     },
@@ -297,82 +297,18 @@
     },
     {
         "model": "movies.director",
+        "pk": 3183304,
+        "fields": {
+            "name": "Serik Beyseu",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
         "pk": 568322,
         "fields": {
             "name": "Dan Trachtenberg",
             "profile_path": "/ce3rCLjSPyvq89D9kd2pyIlLny1.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 26713,
-        "fields": {
-            "name": "Chuck Russell",
-            "profile_path": "/vppcXI2uPEfsBK7vHEXJVrSuup1.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 2710,
-        "fields": {
-            "name": "James Cameron",
-            "profile_path": "/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 1987284,
-        "fields": {
-            "name": "Carlota Pereda",
-            "profile_path": "/8ZPN4k0RZFDSf04r4qJzPoqS9W.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 2403335,
-        "fields": {
-            "name": "Tetsuro Kodama",
-            "profile_path": "/e0dOx96EfiKbsKaxiGkZw9XB4ow.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 90502,
-        "fields": {
-            "name": "Goro Taniguchi",
-            "profile_path": "/v2CxZEm7nAmvQYOlR6gmTPSKGJf.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 78207,
-        "fields": {
-            "name": "Romain Gavras",
-            "profile_path": "/4xvuJYg1pRIc12WxnkJYKR7Ency.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 227722,
-        "fields": {
-            "name": "Rafa\u00ebl Ouellet",
-            "profile_path": "/ddViRY7ne0bvp6cHW34ww5oYO6Z.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 89027,
-        "fields": {
-            "name": "Jared Stern",
-            "profile_path": "/zlXrDsxTBXqxhVDW1hDpx7fRYnM.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 7623,
-        "fields": {
-            "name": "Sam Raimi",
-            "profile_path": "/zdYHQts9iZK0MiNT5unUR0l8v6n.jpg"
         }
     },
     {
@@ -385,26 +321,34 @@
     },
     {
         "model": "movies.director",
-        "pk": 20640,
+        "pk": 2403335,
         "fields": {
-            "name": "Chen Kaige",
-            "profile_path": "/8XLZnrIzTjtee1eGOkxGWMWo8SE.jpg"
+            "name": "Tetsuro Kodama",
+            "profile_path": "/e0dOx96EfiKbsKaxiGkZw9XB4ow.jpg"
         }
     },
     {
         "model": "movies.director",
-        "pk": 1086433,
+        "pk": 93364,
         "fields": {
-            "name": "Vasan Bala",
-            "profile_path": "/gtTecZMERGDFEMgIuYzT6Dz3Nqz.jpg"
+            "name": "Jeff Fowler",
+            "profile_path": "/wExdubFgeBkEUP8MojKPKoOcgdZ.jpg"
         }
     },
     {
         "model": "movies.director",
-        "pk": 1168608,
+        "pk": 1987284,
         "fields": {
-            "name": "Taneli Mustonen",
-            "profile_path": "/tIChC5yE8RRm98qWR8VlePnuecF.jpg"
+            "name": "Carlota Pereda",
+            "profile_path": "/8ZPN4k0RZFDSf04r4qJzPoqS9W.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2710,
+        "fields": {
+            "name": "James Cameron",
+            "profile_path": "/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
         }
     },
     {
@@ -417,6 +361,30 @@
     },
     {
         "model": "movies.director",
+        "pk": 89027,
+        "fields": {
+            "name": "Jared Stern",
+            "profile_path": "/zlXrDsxTBXqxhVDW1hDpx7fRYnM.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 78207,
+        "fields": {
+            "name": "Romain Gavras",
+            "profile_path": "/4xvuJYg1pRIc12WxnkJYKR7Ency.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 7623,
+        "fields": {
+            "name": "Sam Raimi",
+            "profile_path": "/zdYHQts9iZK0MiNT5unUR0l8v6n.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
         "pk": 2441040,
         "fields": {
             "name": "Andrew Hunt",
@@ -425,18 +393,10 @@
     },
     {
         "model": "movies.director",
-        "pk": 1448492,
+        "pk": 90502,
         "fields": {
-            "name": "Castille Landon",
-            "profile_path": "/s1oXtmqyG9X0uDfiU5HidPB6BJx.jpg"
-        }
-    },
-    {
-        "model": "movies.director",
-        "pk": 17883,
-        "fields": {
-            "name": "David O. Russell",
-            "profile_path": "/59rXnJS4g5dUr1Hz8QNLo5epD2a.jpg"
+            "name": "Goro Taniguchi",
+            "profile_path": "/v2CxZEm7nAmvQYOlR6gmTPSKGJf.jpg"
         }
     },
     {
@@ -449,10 +409,930 @@
     },
     {
         "model": "movies.director",
+        "pk": 60007,
+        "fields": {
+            "name": "Sloane Klevin",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 76595,
+        "fields": {
+            "name": "Byron Howard",
+            "profile_path": "/ePJXkxrD44nM0VB7Xx9Q4ityzfT.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 3744992,
+        "fields": {
+            "name": "Fabian Medea",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 142272,
+        "fields": {
+            "name": "Henry Joost",
+            "profile_path": "/4ECqJY42ovB67CU0KBuM1qHwse5.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1496456,
+        "fields": {
+            "name": "Chad Van De Keere",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1086433,
+        "fields": {
+            "name": "Vasan Bala",
+            "profile_path": "/gtTecZMERGDFEMgIuYzT6Dz3Nqz.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 20640,
+        "fields": {
+            "name": "Chen Kaige",
+            "profile_path": "/8XLZnrIzTjtee1eGOkxGWMWo8SE.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2264366,
+        "fields": {
+            "name": "Sunghoo Park",
+            "profile_path": "/psIsL0Ht5RAiuGYRG2PYFnRz9fI.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1283010,
+        "fields": {
+            "name": "Haruo Sotozaki",
+            "profile_path": "/9SsLeBJkFluywq7YaEQiC9iIFBq.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1168608,
+        "fields": {
+            "name": "Taneli Mustonen",
+            "profile_path": "/tIChC5yE8RRm98qWR8VlePnuecF.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1448492,
+        "fields": {
+            "name": "Castille Landon",
+            "profile_path": "/s1oXtmqyG9X0uDfiU5HidPB6BJx.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1494681,
+        "fields": {
+            "name": "Christopher Jolley",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2036,
+        "fields": {
+            "name": "Alex Garland",
+            "profile_path": "/nDCkPeWFVcvXrRAJuXNxVCTJEXe.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 64141,
+        "fields": {
+            "name": "David Gordon Green",
+            "profile_path": "/fJqIVaVwLeFBlZKQTDbzbcvV4XZ.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1495399,
+        "fields": {
+            "name": "Masato Jimbo",
+            "profile_path": "/azZeT4v6OREIiW3zvNzlKaVGwjT.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
         "pk": 116736,
         "fields": {
             "name": "Matthias Temmermans",
             "profile_path": "/qDz6n284xLjn40OUI09drRTBcrQ.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 92125,
+        "fields": {
+            "name": "Conrad Helten",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 32278,
+        "fields": {
+            "name": "Matt Reeves",
+            "profile_path": "/cZSKCow6JVlQLgU9doSCnSTB9Pw.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 30058,
+        "fields": {
+            "name": "Steven C. Miller",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 227722,
+        "fields": {
+            "name": "Rafa\u00ebl Ouellet",
+            "profile_path": "/ddViRY7ne0bvp6cHW34ww5oYO6Z.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 88077,
+        "fields": {
+            "name": "Alex Zamm",
+            "profile_path": "/2Rtymz6bQ23cEbnL2dLpjM0ZCAP.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 145509,
+        "fields": {
+            "name": "Ozan A\u00e7\u0131ktan",
+            "profile_path": "/zmLvg5Ay7Gd1Lxfb8YewcLt6cpN.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1102370,
+        "fields": {
+            "name": "L. Gustavo Cooper",
+            "profile_path": "/a4qbFDnkRmzeDmBUwj0qTbZu3sp.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 55499,
+        "fields": {
+            "name": "Scott Derrickson",
+            "profile_path": "/xNT24kgpyw1rdoYJZDW0kEG6Wuq.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1299642,
+        "fields": {
+            "name": "Julius Avery",
+            "profile_path": "/nK9ITHGuAWABC0q3fQUD4JQ9yQ1.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 59315,
+        "fields": {
+            "name": "Olivia Wilde",
+            "profile_path": "/3C7ogDK7ZrpQezMxG8ILO2ILY9a.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1097187,
+        "fields": {
+            "name": "Maximilian Elfeldt",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 572295,
+        "fields": {
+            "name": "Howard J. Ford",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 70652,
+        "fields": {
+            "name": "Derek Drymon",
+            "profile_path": "/1ZdPd2JaiigVDB7hPxy29RAx9GY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 54789,
+        "fields": {
+            "name": "Sean Patrick Flanery",
+            "profile_path": "/aHQtxIjMEDWdXqvFJplx0Kcwdn6.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1637776,
+        "fields": {
+            "name": "Matt Peters",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1213162,
+        "fields": {
+            "name": "Todd Holland",
+            "profile_path": "/2BadWgY9hzJKpiRG63fo6NuE2Xw.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 57646,
+        "fields": {
+            "name": "Henry Selick",
+            "profile_path": "/6JkYvs9ce3vMvCqWXzGPUzpCKkJ.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2378215,
+        "fields": {
+            "name": "Bang Woo-ri",
+            "profile_path": "/ofaTg8VN5NniUjEyLnB9q5BWHcR.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 74629,
+        "fields": {
+            "name": "Jon Keeyes",
+            "profile_path": "/2rDJfpaD5fzEYzMcCs4eQlzqkFN.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1430080,
+        "fields": {
+            "name": "Dmitry Gribanov",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 57581,
+        "fields": {
+            "name": "Neil Marshall",
+            "profile_path": "/niiQO8m2fEIdmEBYdawulBSIzwY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 5877,
+        "fields": {
+            "name": "Vincenzo Natali",
+            "profile_path": "/rvYH9Ns2rTZ4X8OlMkfSCh7FPET.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1450921,
+        "fields": {
+            "name": "Ben Steiner",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 19271,
+        "fields": {
+            "name": "Anthony Russo",
+            "profile_path": "/xbINBnWn28YygYWUJ1aSAw0xPRv.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 20739,
+        "fields": {
+            "name": "Adam Shankman",
+            "profile_path": "/zZmZgVp5OTU2eSMCDuOXGlQ4fBR.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 147021,
+        "fields": {
+            "name": "S. S. Rajamouli",
+            "profile_path": "/g7jXGAVT8T5vq81fO5JWDleDc75.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 18898,
+        "fields": {
+            "name": "Rob Minkoff",
+            "profile_path": "/fn5QA0bqJn6tk4Wt1QonjojFPjd.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1423811,
+        "fields": {
+            "name": "Paul Shoulberg",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1062420,
+        "fields": {
+            "name": "John Ross",
+            "profile_path": "/eKLnHTIVrSojToZOfvNhn89awGM.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 10965,
+        "fields": {
+            "name": "Chris Columbus",
+            "profile_path": "/yCyEz90NqjEXKZ7HYcEhDXlLlPc.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 230217,
+        "fields": {
+            "name": "Adri\u00e1n Caetano",
+            "profile_path": "/qsJm9IHiJqVo1w1WaOQlN7SrYJv.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 52842,
+        "fields": {
+            "name": "Garth Jennings",
+            "profile_path": "/zl6ZWijGySSIYJRFalleAiGkxyQ.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 8,
+        "fields": {
+            "name": "Lee Unkrich",
+            "profile_path": "/crb297utC6W4HSstOe5djDPTwEN.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 18864,
+        "fields": {
+            "name": "Tom McGrath",
+            "profile_path": "/83lSBvaRShYObPvhE89UDUkUfWo.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 12098,
+        "fields": {
+            "name": "Chris Miller",
+            "profile_path": "/qKdbhP9amIRlydcoivWlTx3szuS.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 3384808,
+        "fields": {
+            "name": "Ahmed Amrani",
+            "profile_path": "/iVmfv07MkIrUa4II3xziaXyvIol.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1307036,
+        "fields": {
+            "name": "Kenji Nagasaki",
+            "profile_path": "/ocQTs3KldutDj5zmqpxN4QsZzxC.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 402272,
+        "fields": {
+            "name": "Anna Foerster",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 7929,
+        "fields": {
+            "name": "Angus MacLane",
+            "profile_path": "/aVjfb4A3Nms5JFyYP7yqx5s7YtQ.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1212871,
+        "fields": {
+            "name": "Thomas M. Wright",
+            "profile_path": "/nVBUjQvFHjzkz9Bz6BXAJ8c7XFD.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 174313,
+        "fields": {
+            "name": "Adam Nee",
+            "profile_path": "/fNEZocYjeeI8WtpNmEo19mkEoNT.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 17883,
+        "fields": {
+            "name": "David O. Russell",
+            "profile_path": "/59rXnJS4g5dUr1Hz8QNLo5epD2a.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1113994,
+        "fields": {
+            "name": "Eric Appel",
+            "profile_path": "/vRbnqV3te2xSsz3VPXZi8rKTBti.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2269906,
+        "fields": {
+            "name": "Audie Harrison",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1936356,
+        "fields": {
+            "name": "N\u00e9stor S\u00e1nchez Sotelo",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 91268,
+        "fields": {
+            "name": "Ruben Fleischer",
+            "profile_path": "/3JLxOPFTLigSy8FjFjDyMwD9GIp.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1250035,
+        "fields": {
+            "name": "Takayuki Hamana",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 50767,
+        "fields": {
+            "name": "Craig Gillespie",
+            "profile_path": "/pVHspL9QWsXCm3t3VXEaCJ9y8Zz.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2606947,
+        "fields": {
+            "name": "Marco V\u00e9lez Esquivia",
+            "profile_path": "/wmUhm55r1AIqMUaItTZxvIL3h99.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 96677,
+        "fields": {
+            "name": "Nora Twomey",
+            "profile_path": "/oNbIsof7o90SS2J0CrdVQjNqMjp.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1844423,
+        "fields": {
+            "name": "Goran Stolevski",
+            "profile_path": "/7z2FpfwjTTG2v4JKNYcCbIDHENX.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1333,
+        "fields": {
+            "name": "Andy Serkis",
+            "profile_path": "/eNGqhebQ4cDssjVeNFrKtUvweV5.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1698815,
+        "fields": {
+            "name": "Claude Shires",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1294527,
+        "fields": {
+            "name": "Kim Hong-sun",
+            "profile_path": "/xvf4c49kDqfXW6Ry1lO9jeF7lGX.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1261455,
+        "fields": {
+            "name": "Pierre Perifel",
+            "profile_path": "/9LAG3yaiZngSaftBkPLODkd8GjP.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 38673,
+        "fields": {
+            "name": "Channing Tatum",
+            "profile_path": "/bhTmp6FA8fOQnGlNk75tdmj2bpu.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 138781,
+        "fields": {
+            "name": "Robert Eggers",
+            "profile_path": "/8Mbq0G8FguELKC8zNFunapPpkt5.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2814493,
+        "fields": {
+            "name": "Jamie Bailey",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 69309,
+        "fields": {
+            "name": "Luc\u00eda Puenzo",
+            "profile_path": "/7QFPCMOCTf9ujWeP0oM8cWGwLh0.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 10723,
+        "fields": {
+            "name": "Mike Newell",
+            "profile_path": "/zeLnvLZtyJaBP1wWceRM7HWkm0E.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 10702,
+        "fields": {
+            "name": "Martin Campbell",
+            "profile_path": "/vPT3FJrBE35yRpbbkLWQthhEDcr.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 3773187,
+        "fields": {
+            "name": "David Hoffman",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2703260,
+        "fields": {
+            "name": "Diego Freitas",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 11343,
+        "fields": {
+            "name": "David Yates",
+            "profile_path": "/hAHOxR0NK4cZDumqNIpDoEdGVAh.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 88253,
+        "fields": {
+            "name": "Barbara Bialowas",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1976339,
+        "fields": {
+            "name": "Lawrence Fowler",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 51959,
+        "fields": {
+            "name": "John Kafka",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2399479,
+        "fields": {
+            "name": "Pailin Wedel",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1489421,
+        "fields": {
+            "name": "Ignacio Tatay",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 995521,
+        "fields": {
+            "name": "Kristina Buozyte",
+            "profile_path": "/1gCbPq6BoQaExQj8TTW1XD1OKLY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1294594,
+        "fields": {
+            "name": "Moon Hyun-sung",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 84833,
+        "fields": {
+            "name": "Zach Cregger",
+            "profile_path": "/agO3u56JvLIZlydWyE8LcCKgpYY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 5718,
+        "fields": {
+            "name": "John C. Donkin",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 3571278,
+        "fields": {
+            "name": "Ty Leisher",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 125738,
+        "fields": {
+            "name": "Daniel Espinosa",
+            "profile_path": "/rq6TkUBkSXvOrmKEjG5lt8kuhF4.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 5524,
+        "fields": {
+            "name": "Andrew Adamson",
+            "profile_path": "/qqIAVKAe5LHRbPyZUlptsqlo4Kb.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1187130,
+        "fields": {
+            "name": "Michael Grandage",
+            "profile_path": "/kiJ6YR0m9NFHaurEmEZIiqKmeRc.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 197,
+        "fields": {
+            "name": "David Silverman",
+            "profile_path": "/4ia152M03hntrS7FBHveRx2VeuP.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1168992,
+        "fields": {
+            "name": "Sam Macaroni",
+            "profile_path": "/wIFgPESaYDylf7QG0B9ub5RphgX.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1162038,
+        "fields": {
+            "name": "Lawrie Brewster",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 231705,
+        "fields": {
+            "name": "Matt Eskandari",
+            "profile_path": "/kSg4nKaFXsKZyO2hI48jAkBkPEY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 72611,
+        "fields": {
+            "name": "Fabrice Du Welz",
+            "profile_path": "/lgCfLX9JDgVNtaO5mt9SUfBdZqO.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 3323719,
+        "fields": {
+            "name": "Jasmine Ebony Thomas",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1327767,
+        "fields": {
+            "name": "Susumu Yamaguchi",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1144604,
+        "fields": {
+            "name": "Destin Daniel Cretton",
+            "profile_path": "/s8uAUG9egZlRIU0PKNkTkIz9E6g.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2461,
+        "fields": {
+            "name": "Mel Gibson",
+            "profile_path": "/oSOYCghY3XcXBYqMA0fsEi8WKaa.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 53334,
+        "fields": {
+            "name": "Jim Sheridan",
+            "profile_path": "/aWTmBt44TyUCb0t50avtFsPdTPp.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 11218,
+        "fields": {
+            "name": "Alfonso Cuar\u00f3n",
+            "profile_path": "/gaHhrzPfxfc3cbQLkDt54gtP3n1.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1551199,
+        "fields": {
+            "name": "Alonso O. Lara",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 10847,
+        "fields": {
+            "name": "Santiago Segura",
+            "profile_path": "/w5gSHzLWoivAN2g4z2yaxCSFyTY.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1694871,
+        "fields": {
+            "name": "Fabr\u00edcio Bittar",
+            "profile_path": "/rvBJFfOoGksLEWMxg2x70TZZ5di.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 2289991,
+        "fields": {
+            "name": "Lila Neugebauer",
+            "profile_path": "/69BAJCXSODBx1H2iFuqMYXjImX6.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 15217,
+        "fields": {
+            "name": "Zack Snyder",
+            "profile_path": "/iD0GDqkvJXDXiNEZej198hjt3Tt.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1059129,
+        "fields": {
+            "name": "Han Jae-rim",
+            "profile_path": "/rVJXoQz39swRxiH2Mg1vN806NC2.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1420324,
+        "fields": {
+            "name": "Chris Johnston",
+            "profile_path": null
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 89972,
+        "fields": {
+            "name": "Hajime Kamegaki",
+            "profile_path": "/l0tvUz7ITTAyLY7XNmSTTO7f8Al.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 100734,
+        "fields": {
+            "name": "Johannes Roberts",
+            "profile_path": "/8hHny6atmFXcuNl2m1AP3fIOayz.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 80978,
+        "fields": {
+            "name": "Brian Goodman",
+            "profile_path": "/kvRS1QA7YuYhlFO3M8GbnOtvXts.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 1828590,
+        "fields": {
+            "name": "Simon McQuoid",
+            "profile_path": "/pFKRKvSb6N3CMNZYLpGmdSPIjch.jpg"
+        }
+    },
+    {
+        "model": "movies.director",
+        "pk": 141883,
+        "fields": {
+            "name": "Tobias Lindholm",
+            "profile_path": "/tNl1qcd5QzwddNPycDtgNfG002u.jpg"
         }
     }
 ]

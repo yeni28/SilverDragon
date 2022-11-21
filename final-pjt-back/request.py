@@ -30,7 +30,7 @@ re_movie_pk_list = []
 
 
 
-for i in range(1,4):
+for i in range(1,10):
     urls = f'https://api.themoviedb.org/3/movie/popular?api_key=6f6513726d3b3eef83b5927098909d71&language=ko-KR&page={i}'
 
     datas = requests.get(urls)
