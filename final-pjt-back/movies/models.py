@@ -51,3 +51,10 @@ class CommentReply(models.Model):
     comment = models.TextField()
     moviecomment = models.ForeignKey(MovieComment, related_name='replymoviecomment', on_delete=models.CASCADE, null=True)
     parent = models.ForeignKey('self', related_name='reply', on_delete=models.CASCADE, null=True)
+
+
+class LikeMovieList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_like_movie', on_delete=models.CASCADE )
+    title = models.CharField(max_length=50)
+    movies = models.ManyToManyField(Movie, related_name='user_like_movie_list')
+

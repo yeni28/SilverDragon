@@ -87,3 +87,12 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = "__all__"
+
+
+class LikeMovieListSerializer(serializers.ModelSerializer):
+    movies =MovieDetailSerializer(many=True, read_only=True)
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = LikeMovieList
+        fields = "__all__"
