@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     is_logined: false,
     user_movie_list: null,
+    movies:null,
   },
   getters: {},
   mutations: {
@@ -50,6 +51,17 @@ export default new Vuex.Store({
       localStorage.removeItem('jwt')
       state.is_logined = false
       state.user_movie_list = null
+    },
+    // 영화 저장하기
+    CREATE_MOIVE(state){
+      axios({
+        method:'get',
+        url:'http://127.0.0.1:8000/movies/',
+      })
+      .then((res)=>{
+        state.movies = res.data
+      })
+      .catch((err)=>console.log(err))
     },
   },
   actions: {

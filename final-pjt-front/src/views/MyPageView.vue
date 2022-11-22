@@ -11,9 +11,14 @@
         <div>
           콘텐츠 들어갈 자리
         </div>
-        <div>
-          {{commentLists}}
-        </div>
+<!-- 
+        <div
+        v-for="comment in commentLists"
+        :key="comment.id"
+        >
+        {{comment.movie}}
+        {{comment.comment}}
+        </div> -->
       </div>
 
     </div>
