@@ -12,7 +12,7 @@
       </span>
       <span :class="{ dinone: !is_logined }">
         <router-link to="/logout">로그아웃</router-link> |
-        내정보
+        
       </span>
     </nav>
     <router-view />
