@@ -108,12 +108,11 @@ def likemovie(request):
 
 
 @api_view(['POST'])
-def likemovienew(request, movie_pk):
+def likemovienew(request):
     if request.method == 'POST':
-        movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = LikeMovieListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user, movies=movie)
+            serializer.save(user=request.user)
         return Response(serializer.data)
 
 @api_view(['POST'])
