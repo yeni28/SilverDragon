@@ -47,6 +47,20 @@ def movie_comment(request, movie_pk):
                 serializer.save(user=request.user, movie=moviec)
                 return Response(serializer.data)
 
+@api_view(['PUT','DELETE'])
+@permission_classes([IsAuthenticated])
+def movie_comment_dp(request, movie_pk, comment_pk):
+    comment = MovieComment.objects.get(pk=comment_pk)
+    if request.method == 'DELETE':
+        comment.delete()
+    elif request.method == 'PUT':
+        serializer = MovieCommentSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        
+
+
 @api_view(['GET','POST'])
 def searchmovie(request, movie_title):
     if request.method == 'GET':
@@ -54,12 +68,10 @@ def searchmovie(request, movie_title):
             'title': movie_title,
         }
         # 쿼리 셋 유니온 기능 활용하기.
-        # subject = Movie.objects.all().filter(title__contains=movie_title)
         subject = Movie.objects.all().filter(title__contains=movie_title)
         serializer = MovieDetailSerializer(subject, many=True)
         return Response(serializer.data)
 
-    #     # 조회 1. mode - 최신순, 평점순, 인기순
     # elif mode in ('release_date', 'vote_average', 'popularity'):
     #     if mode != 'vote_average':
     #         movies = Movie.objects.order_by(f'-{mode}')[:100]
@@ -130,7 +142,9 @@ def commentlist(request):
 
 
 
+
 @api_view(['GET'])
 def recommend(request):
     if request.method =='GET':
-        
+        genres = request.data['genre']
+        pass
