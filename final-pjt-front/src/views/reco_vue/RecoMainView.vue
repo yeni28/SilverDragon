@@ -60,9 +60,6 @@ export default {
     find_movie() {
       this.$store.dispatch("movie/search_movie", this.input_value);
     },
-		recommand_movie(movie) {
-			this.$store.dispatch("movie/recommend_move", movie)
-		},
   },
 };
 </script>

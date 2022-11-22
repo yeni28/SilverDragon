@@ -30,8 +30,6 @@ const state = () => {
 const getters = {};
 const mutations = {
   SEARCH_MOVIE(state, res) {
-    console.log(res);
-    console.log(state);
     state.searchmovie = res
   },
 };
@@ -42,16 +40,26 @@ const actions = {
       url: `http://127.0.0.1:8000/movies/search/${searchinput}/`,
     })
       .then((res) => {
-        console.log(res.data);
         context.commit("SEARCH_MOVIE", res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   },
-  // recommand_movie(context, movie) {
-    
-  // }
+  recommand_movie(context, movie) {
+    axios({
+      method: "POST",
+      url: 'http://127.0.0.1:8000/movies/recommend/',
+      data: {
+        'movie': movie,
+      },
+      headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err)=>{console.log(err);})
+  }
 };
 
 export default {

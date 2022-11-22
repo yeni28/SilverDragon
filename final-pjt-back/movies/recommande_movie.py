@@ -39,7 +39,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 #     f = csv.writer(output_file)
 
-#     f.writerow(["title", "release_date", "popularity","vote_count","vote_average","genres","actor","director"])
+#     f.writerow(["title", "release_date", "popularity","vote_count","vote_average","genres","actor","director", "id"])
 
 #     for datum in data:
 #         temp_list = []
@@ -50,21 +50,19 @@ from sklearn.metrics.pairwise import cosine_similarity
 #                 "name": genres_datas[g]
 #             })
 
-#         f.writerow([datum["title"], datum["release_date"], datum["popularity"], datum["vote_count"], datum["vote_average"], temp_list, datum["actor"], datum["director"]])
+#         f.writerow([datum["title"], datum["release_date"], datum["popularity"], datum["vote_count"], datum["vote_average"], temp_list, datum["actor"], datum["director"], datum["id"]])
 
 
 # 추천영화
 def find_movie(movie):
-    pd.set_option('display.max_rows', 580) # 행을 최대 100개까지 출력
-    pd.set_option('display.max_columns', 8) # 열을 최대 100개 까지 출력
+    pd.set_option('display.max_rows', 100) # 행을 최대 100개까지 출력
+    pd.set_option('display.max_columns', 100) # 열을 최대 100개 까지 출력
     pd.set_option('display.width', 1000) #출력 창 넓이 설정
 
-    data = pd.read_csv('movie.csv', encoding='UTF-8')
+    data = pd.read_csv('movieitem.csv', encoding='UTF-8')
 
-    data = data[["title", "release_date", "popularity","vote_count","vote_average","genres","actor","director"]]
-
+    data = data[["title", "release_date", "popularity","vote_count","vote_average","genres","actor","director","id"]]
     m = data["vote_count"].quantile(0.9)
-    print(m)
     data = data.loc[data["vote_count"] >= m]
     C = data['vote_average'].mean()
 
@@ -81,22 +79,25 @@ def find_movie(movie):
     c_vector_genres = count_vector.fit_transform(data['genres'])
 
     genre_c_sim = cosine_similarity(c_vector_genres,c_vector_genres).argsort()[:,::-1]
-
     def get_recommend_movie_list(df, movie_title, top=30):
         target_movie_index = df[df['title']==movie_title].index.values 
-        sim_index = genre_c_sim[target_movie_index, :top].reshape(-1)
-
-        sim_index=sim_index[sim_index != target_movie_index]
+        print(target_movie_index, '1111111111111111111111111111111111111111111111111')
+        try:
+            sim_index = genre_c_sim[target_movie_index, :top].reshape(-1)
+        except:
+            sim_index = genre_c_sim[target_movie_index, :30].reshape(-1)
+        print(sim_index)
+        # sim_index=sim_index[sim_index != target_movie_index]
         result = df.iloc[sim_index].sort_values('recommed_count', ascending=False)[:10]
-        
         return result
 
 
-    print('마음에들엇던영화의 제목')
-    movie = input()
-    temp = get_recommend_movie_list(data,movie_title=movie)
+    temp = get_recommend_movie_list(data, movie)
     ans = []
     ans = temp.values.tolist()
     ans = array(ans)
+    send_res = []
+    for i in ans:
+        send_res.append(i[8])
 
-    return ans
+    return send_res

@@ -56,5 +56,5 @@ class CommentReply(models.Model):
 class LikeMovieList(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_like_movie', on_delete=models.CASCADE )
     title = models.CharField(max_length=50)
-    movies = models.ManyToManyField(Movie, related_name='user_like_movie_list')
+    movies = models.ManyToManyField(Movie, related_name='user_like_movie_list', blank=True)
 

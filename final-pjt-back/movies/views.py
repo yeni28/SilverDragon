@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
-
+from . import recommande_movie
+# from . import movieitem
 
 from .serializers import *
 from .models import *
 # Create your views here.
 
-import random
 
 @api_view(['GET', 'POST'])
 def home_movies(request):
@@ -108,12 +108,11 @@ def likemovie(request):
 
 
 @api_view(['POST'])
-def likemovienew(request, movie_pk):
+def likemovienew(request):
     if request.method == 'POST':
-        movie = get_object_or_404(Movie, pk=movie_pk)
         serializer = LikeMovieListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user, movies=movie)
+            serializer.save(user=request.user)
         return Response(serializer.data)
 
 @api_view(['POST'])
@@ -143,8 +142,11 @@ def commentlist(request):
 
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def recommend(request):
-    if request.method =='GET':
-        genres = request.data['genre']
-        pass
+
+    if request.method =='POST':
+        movies_id = recommande_movie.find_movie(request.data['movie']['title'])
+        movies = Movie.objects.filter(id__in=movies_id)
+        serializer = MovieDetailSerializer(movies, many=True)
+        return Response(serializer.data)

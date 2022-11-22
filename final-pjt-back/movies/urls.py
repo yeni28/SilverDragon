@@ -10,7 +10,7 @@ urlpatterns = [
     # path('<int:movie_pk>/comment/<int:comment_pk>/', views.replycomment),
     path('search/<str:movie_title>/', views.searchmovie),
     # 추천 페이지
-    # 
+    path('recommend/', views.recommend),
     # 영화 리스트
     path('likemovie/', views.likemovie),
     path('likemovienew/', views.likemovienew),
