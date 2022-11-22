@@ -2,13 +2,20 @@
   <div>
     <div class="mypage">
       <div class="profile_area">
-        <div>
-          프로필이 들어갈 자리
+        <!-- 이미지 -->
+        <div class="user_profile_box">
+          <img class="user_profile_img" src="../assets/default_source/cat.jpg" alt="profile">
         </div>
+        <!-- 이름 //username 불러오기 수정 필요함-->
+        <div class="user_name"> {{commentLists[0].user.username}} </div>
+        <br>
+        <!-- 선택 -->
+        <button class="btn btn-success"> 내가 쓴 댓글 </button> <br>
+        <button class="btn btn-primary"> 영화 컬렉션 </button>
       </div>
 
       <div class="mycontent">
-        <div>
+        <div @click="likeMovielist()">
           콘텐츠 들어갈 자리
         </div>
 <!-- 
@@ -32,6 +39,7 @@ export default {
     data(){
       return{
         commentLists:null,
+        like_movie_list:null,
       }
     },
     methods:{
@@ -46,7 +54,8 @@ export default {
           this.commentLists = res.data
         })
         .catch((err)=>console.log(err))
-      }
+      },
+      
     },
     created(){
       this.commentList()
@@ -58,13 +67,38 @@ export default {
 .mypage{
   display: block;
 }
-
+/* 프로필 */
 .profile_area{
   float:left;
-  width:25%;
-  height: 20rem;
+  width:20%;
+  height: auto;
+  margin-left:2rem;
   border: solid 0.1rem white;
+  border-radius: 2rem;
 }
+
+/* 유저 */
+
+.user_profile_box{
+  width:13rem;
+  height: 13rem;
+  border-radius: 70%;
+  overflow: hidden;
+  margin:auto;
+  margin-top: 1rem;
+}
+.user_profile_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user_name{
+  font-family: NeoRG;
+  font-size: 1.5rem;
+  margin-top:0.5rem;
+}
+
+/* 콘텐츠 */
 
 .mycontent{
   float:right;

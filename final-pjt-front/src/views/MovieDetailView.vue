@@ -261,7 +261,9 @@
               <!-- 컬렉션 체크 리스트로 -->
               <div id="checklist" style="margin: 1rem; background-color: transparent;">
                 <span style="font-family:PreR;font-size:1.2rem;"> 🛒 컬렉션에 담기 </span>
-                <div class="form-check">
+                <div class="form-check"
+                v-for="movie_list in user_movie_list"
+                  :key="movie_list.id">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -269,12 +271,24 @@
                     id="flexCheckDefault"
                   />
                   <label class="form-check-label" for="flexCheckDefault" style="background-color: transparent;">
-                    Default checkbox
+                    {{movie_list.title}}
                   </label>
                 </div>
               </div>
               <!-- 새 컬렉션 만들기 -->
-              <div></div>
+              <div>
+                <button 
+                @click="collection_click"
+                style="color:white; font-family: NeoBD;">
+                새 컬렉션 만들기
+                </button>
+                <!-- 컬렉션 입력 받기 -->
+                <div class="create_collection" id="create_collection">
+                  이름
+                  <input @keyup.enter="likeMovieNew" type="text" v-model="collection_title" placeholder="재생목록 이름 입력" style="color:white;">
+                  <hr>
+                </div>
+              </div>
               <!-- 닫기 버튼 -->
               <div style="background-color: transparent">
                 <button
@@ -363,11 +377,17 @@ export default {
       currentSelectedRating: null,
       rate: null,
       isclicked: false,
+      collection_title:null,
     };
   },
   components: {
     StarRating,
     MovieSimilarCard,
+  },
+  computed:{
+    user_movie_list(){
+      return this.$store.state.user_movie_list
+    }
   },
   methods: {
     getMovieDetail(movie_pk) {
@@ -391,23 +411,17 @@ export default {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
       })
         .then(() => {
-          if(!this.movie_comment){
-            alert('댓글을 입력하세요!')
-          }
-          if(!this.currentRating){
-            alert('별점을 입력하세요!')
-          }
-          
           this.getMovieDetail(movie_pk);
           this.movie_comment = null;
           this.currentSelectedRating = null;
           this.rate = null;
           this.currentRating = null;
+          this.scrollBehavior()
         })
         .catch((err) => {
           console.log(err);
         });
-        location.href = "#comments"
+        // location.href = "#comments"
       },
     deleteComment(movie_pk) {
       axios({
@@ -445,6 +459,16 @@ export default {
         modal_like.style.visibility = "hidden";
       }
     },
+    collection_click() {
+      const create_collection = document.getElementById("create_collection");
+      if (create_collection.style.visibility !== "visible") {
+        create_collection.style.visibility = "visible";
+      }
+      else {
+        create_collection.style.visibility = "hidden";
+
+      }
+    },
     // 
   
     // 별점
@@ -458,7 +482,24 @@ export default {
       this.currentSelectedRating = rating;
       this.rate = rating;
     },
+    // 스크롤
+    // 좋아요
+    likeMovieNew(){
+        axios({
+          method:'post',
+          url:'http://127.0.0.1:8000/movies/likemovienew/',
+          data:{
+            title:this.collection_title
+          },
+          headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+        })
+        .then(()=>{
+          this.$store.commit('like_movie_list')
+        })
+        .catch((err)=>console.log(err))
+      }
   },
+  
   created() {
     this.getMovieDetail(this.$route.params.movie_pk);
   },
@@ -766,7 +807,7 @@ a.button {
 }
 
 .btnFloat_comment:hover:before {
-  background-color: #0d70f1;
+  background-color: #226efc;
   color: #fff;
   margin-top: -2px;
   margin-left: 0px;
@@ -776,7 +817,7 @@ a.button {
   box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
 }
 .btnFloat_trailer:hover:before {
-  background-color: #0d70f1;
+  background-color: #0142bb;
   color: #fff;
   margin-top: -2px;
   margin-left: 0px;
@@ -798,7 +839,7 @@ a.button {
 }
 
 .btn_write:hover {
-  background-color: #f1a10d;
+  background-color: #3d81ff;
   color: #fff;
   margin-left: 0px;
   transform: scale(0.1.1, 1.1);
@@ -813,15 +854,15 @@ a.button {
   width: 120px;
   height: 50px;
   border-radius: 2rem;
-  background-color: #3b3b3b;
+  background-color: #fffdfd;
   margin-top: 1rem;
   border: none;
-  color: #fff;
+  color: rgb(36, 36, 36);
   font-family: NeoBD;
 }
 .btn_like:hover {
-  background-color: #f1a10d;
-  color: #fff;
+  background-color: #fffdfd;
+  color: rgb(36, 36, 36);
   transform: scale(0.1.1, 1.1);
   -webkit-transform: scale(1.1, 1.1);
   -ms-transform: scale(1.1, 1.1);
@@ -841,5 +882,11 @@ a.button {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10%;
   box-shadow: 1px 1px 1px rgba(5, 5, 5, 0.5);
+}
+
+/* 새로운 컬렉션 추가하기 */
+.create_collection {
+  display: block;
+  visibility: hidden;
 }
 </style>
