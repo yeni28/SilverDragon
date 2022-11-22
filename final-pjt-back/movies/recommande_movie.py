@@ -85,9 +85,9 @@ def find_movie(movie):
         try:
             sim_index = genre_c_sim[target_movie_index, :top].reshape(-1)
         except:
-            sim_index = genre_c_sim[target_movie_index, :30].reshape(-1)
+            sim_index = genre_c_sim[target_movie_index, :100].reshape(-1)
         print(sim_index)
-        # sim_index=sim_index[sim_index != target_movie_index]
+        sim_index=sim_index[sim_index != target_movie_index]
         result = df.iloc[sim_index].sort_values('recommed_count', ascending=False)[:10]
         return result
 

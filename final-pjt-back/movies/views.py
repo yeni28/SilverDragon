@@ -53,6 +53,7 @@ def movie_comment_dp(request, movie_pk, comment_pk):
     comment = MovieComment.objects.get(pk=comment_pk)
     if request.method == 'DELETE':
         comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == 'PUT':
         serializer = MovieCommentSerializer(comment, data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -105,8 +106,6 @@ def likemovie(request):
         serializer = LikeMovieListSerializer(movie_list, many=True)
         return Response(serializer.data)
 
-
-
 @api_view(['POST'])
 def likemovienew(request):
     if request.method == 'POST':
@@ -115,21 +114,25 @@ def likemovienew(request):
             serializer.save(user=request.user)
         return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST', 'PUT', 'DELETE'])
 def likemoviecreate(request, movie_pk, list_pk):
+    movie = Movie.objects.get(pk=movie_pk)
     if request.method == 'POST':
-        movie = Movie.objects.get(pk=movie_pk)
         LikeMovieList.objects.get(pk=list_pk).movies.add(movie)
         serializer = LikeMovieListSerializer(movie)
-        print(serializer.data)
         return Response(serializer.data)
+    elif request.method == 'PUT':
+        print('??????qWeqweqweqwe')
+        LikeMovieList.objects.get(pk=list_pk).movies.remove(movie)
+        serializer = LikeMovieListSerializer(movie)
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        likemovielist = LikeMovieList.objects.get(pk=list_pk)
+        likemovielist.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-        # except:
-        #     movie = get_object_or_404(Movie, pk=movie_pk)
-        #     serializer = LikeMovieListSerializer(data=request.data)
-        #     if serializer.is_valid(raise_exception=True):
-        #         serializer.save(user=request.user, movies=movie)
-        #     return Response(serializer.data)
+
+
 
 #코멘트 리스트
 @api_view(['GET'])

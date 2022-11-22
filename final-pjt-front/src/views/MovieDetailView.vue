@@ -181,55 +181,52 @@
                     ></button>
                   </div>
                   <div class="modal-body">
+                    <div
+                      style="
+                        font-family: NeoBD;
+                        font-size: 2rem;
+                        margin-bottom: 1rem;
+                      "
+                    >
+                      {{ movie_detail?.title }}
+                    </div>
+                    <div class="mb-3">
                       <div
-                        style="
-                          font-family: NeoBD;
-                          font-size: 2rem;
-                          margin-bottom: 1rem;
-                        "
+                        @mouseleave="showCurrentRating(0)"
+                        style="display: inline-block"
                       >
-                        {{ movie_detail?.title }}
+                        <star-rating
+                          :star-size="30"
+                          :show-rating="false"
+                          @current-rating="showCurrentRating"
+                          @rating-selected="setCurrentSelectedRating"
+                          :increment="0.5"
+                        ></star-rating>
                       </div>
-                      <div class="mb-3">
-                        <div
-                          @mouseleave="showCurrentRating(0)"
-                          style="display: inline-block"
-                        >
-                          <star-rating
-                            :star-size="30"
-                            :show-rating="false"
-                            @current-rating="showCurrentRating"
-                            @rating-selected="setCurrentSelectedRating"
-                            :increment="0.5"
-                          ></star-rating>
-                        </div>
-                        <span style="margin-left: 1rem; font-family: NeoLT">{{
-                          currentRating
-                        }}</span>
-                        <div>
-                          <label
-                            for="recipient-name"
-                            class="col-form-label"
-                            style="font-family: NeoLT; color: lightgray"
-                            >별점을 선택하세요</label
-                          >
-                          <br />
-                        </div>
-                      </div>
-                      <hr />
-                      <div class="mb-3">
+                      <span style="margin-left: 1rem; font-family: NeoLT">{{
+                        currentRating
+                      }}</span>
+                      <div>
                         <label
-                          for="message-text"
+                          for="recipient-name"
                           class="col-form-label"
-                        ></label>
-                        <textarea
-                          class="form-control"
-                          id="message-text"
-                          style="font-family: NeoRG"
-                          placeholder="댓글을 작성해주세요"
-                          v-model="movie_comment"
-                        ></textarea>
+                          style="font-family: NeoLT; color: lightgray"
+                          >별점을 선택하세요</label
+                        >
+                        <br />
                       </div>
+                    </div>
+                    <hr />
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label"></label>
+                      <textarea
+                        class="form-control"
+                        id="message-text"
+                        style="font-family: NeoRG"
+                        placeholder="댓글을 작성해주세요"
+                        v-model="movie_comment"
+                      ></textarea>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button
@@ -259,34 +256,41 @@
             <button @click="modal_click" class="btn_like">+</button>
             <div class="modal_like" id="modal_like">
               <!-- 컬렉션 체크 리스트로 -->
-              <div id="checklist" style="margin: 1rem; background-color: transparent;">
-                <span style="font-family:PreR;font-size:1.2rem;"> 🛒 컬렉션에 담기 </span>
-                <div class="form-check"
-                v-for="movie_list in user_movie_list"
-                  :key="movie_list.id">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault" style="background-color: transparent;">
-                    {{movie_list.title}}
-                  </label>
-                </div>
+              <div
+                id="checklist"
+                style="margin: 1rem; background-color: transparent"
+              >
+                <span style="font-family: PreR; font-size: 1.2rem">
+                  🛒 컬렉션에 담기
+                </span>
+                <movie-list-check
+                  class="form-check"
+                  v-for="movie_list in user_movie_list"
+                  :key="movie_list.id"
+                  :movie_list="movie_list"
+                  :movie_id = "movie_detail.id"
+                >
+                </movie-list-check>
               </div>
               <!-- 새 컬렉션 만들기 -->
               <div>
-                <button 
-                @click="collection_click"
-                style="color:white; font-family: NeoBD;">
-                새 컬렉션 만들기
+                <button
+                  @click="collection_click"
+                  style="color: white; font-family: NeoBD"
+                >
+                  새 컬렉션 만들기
                 </button>
                 <!-- 컬렉션 입력 받기 -->
                 <div class="create_collection" id="create_collection">
                   이름
-                  <input @keyup.enter="likeMovieNew" type="text" v-model="collection_title" placeholder="재생목록 이름 입력" style="color:white;">
-                  <hr>
+                  <input
+                    @keyup.enter="likeMovieNew"
+                    type="text"
+                    v-model="collection_title"
+                    placeholder="재생목록 이름 입력"
+                    style="color: white"
+                  />
+                  <hr />
                 </div>
               </div>
               <!-- 닫기 버튼 -->
@@ -366,6 +370,7 @@
 import axios from "axios";
 import StarRating from "vue-star-rating";
 import MovieSimilarCard from "../components/MovieSimilarCard.vue";
+import MovieListCheck from "../components/MovieListCheck.vue";
 
 export default {
   name: "MovieDetailView",
@@ -377,17 +382,18 @@ export default {
       currentSelectedRating: null,
       rate: null,
       isclicked: false,
-      collection_title:null,
+      collection_title: null,
     };
   },
   components: {
     StarRating,
     MovieSimilarCard,
+    MovieListCheck,
   },
-  computed:{
-    user_movie_list(){
-      return this.$store.state.user_movie_list
-    }
+  computed: {
+    user_movie_list() {
+      return this.$store.state.user_movie_list;
+    },
   },
   methods: {
     getMovieDetail(movie_pk) {
@@ -416,13 +422,13 @@ export default {
           this.currentSelectedRating = null;
           this.rate = null;
           this.currentRating = null;
-          this.scrollBehavior()
+          this.scrollBehavior();
         })
         .catch((err) => {
           console.log(err);
         });
-        // location.href = "#comments"
-      },
+      // location.href = "#comments"
+    },
     deleteComment(movie_pk) {
       axios({
         method: "delete",
@@ -452,7 +458,6 @@ export default {
       // 숨기기 (visibility: hidden)
       if (modal_like.style.visibility !== "visible") {
         modal_like.style.visibility = "visible";
-     
       }
       // 보이기 (visibility: visible)
       else {
@@ -463,14 +468,12 @@ export default {
       const create_collection = document.getElementById("create_collection");
       if (create_collection.style.visibility !== "visible") {
         create_collection.style.visibility = "visible";
-      }
-      else {
+      } else {
         create_collection.style.visibility = "hidden";
-
       }
     },
-    // 
-  
+    //
+
     // 별점
     setRating: function (rating) {
       this.rating = rating;
@@ -484,22 +487,23 @@ export default {
     },
     // 스크롤
     // 좋아요
-    likeMovieNew(){
-        axios({
-          method:'post',
-          url:'http://127.0.0.1:8000/movies/likemovienew/',
-          data:{
-            title:this.collection_title
-          },
-          headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+    likeMovieNew() {
+      axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/movies/likemovienew/",
+        data: {
+          title: this.collection_title,
+        },
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+      })
+        .then(() => {
+          this.$store.commit("like_movie_list");
+          this.collection_title = null;
         })
-        .then(()=>{
-          this.$store.commit('like_movie_list')
-        })
-        .catch((err)=>console.log(err))
-      }
+        .catch((err) => console.log(err));
+    },
   },
-  
+
   created() {
     this.getMovieDetail(this.$route.params.movie_pk);
   },
