@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="form-check" @click="makelist">
+  <div style="background-color: transparent;" class="check_whole">
+    <div class="form-check check_area" @click="makelist" style="padding:0.2rem; background-color: transparent;">
       <input
         class="form-check-input"
         type="checkbox"
@@ -10,12 +10,15 @@
       <label
         class="form-check-label"
         :for="movie_list.id"
-        style="background-color: transparent"
+        style="background-color: transparent;
+        font-family: PreL;"
       >
         {{ movie_list.title }}
       </label>
     </div>
-    <button @click="deletelist">삭제</button>
+    <!-- <div>
+      <button class="collection_del_button" @click="deletelist"> X </button>
+    </div> -->
   </div>
 </template>
 
@@ -89,4 +92,15 @@ export default {
 </script>
 
 <style>
+.check_whole{
+  display: flex;
+}
+.check_area{
+
+}
+/* .collection_del_button{
+  color:white;
+  border: none;
+  font-family: NeoLT;
+} */
 </style>

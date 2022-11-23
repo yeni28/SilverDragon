@@ -35,5 +35,5 @@ def profile(request, username):
     person = get_object_or_404(get_user_model(), username=username)
     comment_list = person.replymoviecomment.all()
     like_movie_list = person.user_like_movie.all()
-    
+    s
     return Response()

@@ -26,7 +26,7 @@ class Movie(models.Model):
     vote_count = models.IntegerField()
     vote_average = models.FloatField()
     overview = models.TextField()
-    poster_path = models.CharField(max_length=200)
+    poster_path = models.CharField(max_length=200, null=True, blank=True)
     backdrop_path = models.CharField(max_length=200, null=True)
     genres = models.ManyToManyField(Genre)
     actor = models.ManyToManyField(Actor)
