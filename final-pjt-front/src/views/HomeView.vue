@@ -84,7 +84,12 @@
 
       <!-- 추천 영화 -->
       <div class='recommand_movie1'>
-        <h3 style="font-family: NeoBD;"> 당신을 위한 추천 영화 </h3>
+        <div v-if="user_data">
+          <h3 style="font-family: NeoBD;"> {{user_data.username}}을 위한 추천 영화 </h3>
+        </div>
+        <div v-else>  
+          <h3 style="font-family: NeoBD;"> 당신을 위한 추천 영화 </h3>
+        </div>
         <div class= "row row-cols row-cols-md-5 g-5 outcard" style="margin-top:5px   "
         >
           <movie-recommand-card
@@ -103,6 +108,7 @@
 
 <script>
 import MovieRecommandCard from '../components/MovieRecommandCard.vue'
+import axios from 'axios'
 
 export default {
   components: { MovieRecommandCard },
@@ -113,6 +119,7 @@ export default {
       title_movie1:null,
       title_movie2:null,
       title_movie3:null,
+      user_data:null,
     }
   },
   computed:{
@@ -128,9 +135,21 @@ export default {
     getTitleRandomMovie(){
       this.$store.commit("CREATE_MOIVE");
     },
+    userProfile(){
+        axios({
+          method:'get',
+          url:"http://127.0.0.1:8000/accounts/profile/",
+          headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+        })
+        .then((res)=>{
+          this.user_data = res.data
+        })
+        .catch((err)=>console.log(err))
+      }
   },
   created(){
     this.getTitleRandomMovie()
+    this.userProfile()
   }
 }
 </script>
@@ -256,7 +275,7 @@ export default {
 }
 .titleimg {
   object-fit: cover;
-    object-position:10% 15% ;
+  object-position:10% 15% ;
   position: absolute;
   width: 100%;
   height: 100%;

@@ -300,6 +300,7 @@
                 <div class="create_collection" id="create_collection">
                   <label class="create_collection_label">Collection Name</label><br>
                   <input
+                    class="input_title"
                     @keyup.enter="likeMovieNew"
                     type="text"
                     v-model="collection_title"
@@ -953,7 +954,7 @@ padding: 0.5rem;
 .create_title_btn:hover {
   color:white;
 }
-input[type=text] {
+.input_title {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #226efc;

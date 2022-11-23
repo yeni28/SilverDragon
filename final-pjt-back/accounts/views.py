@@ -31,9 +31,9 @@ def signup(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
-def profile(request, username):
-    person = get_object_or_404(get_user_model(), username=username)
-    comment_list = person.replymoviecomment.all()
-    like_movie_list = person.user_like_movie.all()
-    serializer = serializer(person)
+def profile(request):
+    person = get_object_or_404(get_user_model(), username=request.user)
+    # comment_list = person.replymoviecomment.all()
+    # like_movie_list = person.user_like_movie.all()
+    serializer = UserSerializer(person)
     return Response(serializer.data)

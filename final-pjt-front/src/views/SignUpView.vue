@@ -1,44 +1,23 @@
 <template>
   <div>
-    <form @submit.prevent="signup">
-      <div class="form-group">
-      <label for="username">username : </label>
-      <input
-        type="text"
-        id="username"
-        v-model="username"
-        class="text-light"
-      />
-      <span class="error"></span>
-      </div>
-      <br />
-
-      <div class="form-group">
-      <label for="password1"> password : </label>
-      <input
-        type="password"
-        id="password1"
-        v-model="password1"
-        class="text-light"
-      />
-      <span class="error"></span>
-      </div>
-      <br />
-
-      <div class="form-group">
-      <label for="password2"> password confirmation : </label>
-      <input
-        type="password"
-        id="password2"
-        v-model="password2"
-        class="text-light"
-      />
-      <span class="error"></span>
-      </div>
-      <input type="submit" value="SignUp" />
-    </form>
+    <div class="signup_back">
+      
+        <div class="main" style="background-color: rgba(0, 0, 0, 0.7);">
+            <div class="signup" style="background-color:transparent;" >
+              <form @submit.prevent="signup()" style="background-color:transparent;">
+                <label class="label_sign" style="background-color:transparent;" >Sign up</label>
+                <input class="input_sign" type="text" name="txt" placeholder="User name" required="" v-model="username">
+                <input class="input_sign" type="password" name="pswd"  placeholder="비밀번호" required="" v-model="password1" >
+                <input class="input_sign" type="password" name="pswd" placeholder="비밀번호 확인" required="" v-model="password2">
+                <button type="submit" class="button_sign">Sign up</button>
+              </form>
+            </div>
+        </div>
+    
+    </div>
   </div>
 
+  
 
 
 
@@ -64,6 +43,9 @@ export default {
       const password = this.password1;
       const password2 = this.password2;
 
+      if(this.password != this.password2){
+            return alert('비밀번호가 다릅니다!')
+          }
       axios({
         method: "post",
         url: "http://127.0.0.1:8000/accounts/signup/",
@@ -84,125 +66,78 @@ export default {
 };
 </script>
 
-<!-- <script>
-
-$(document).ready(function () {
-
-'use strict';
-
-const usernameError = true,
-    passwordError = true,
-    passConfirm   = true;
-
-// Detect browser for css purpose
-if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-    $('.form form label').addClass('fontSwitch');
-}
-
-// Label effect
-$('input').focus(function () {
-
-    $(this).siblings('label').addClass('active');
-});
-
-// Form validation
-$('input').blur(function () {
-
-    // User Name
-    if ($(this).hasClass('name')) {
-        if ($(this).val().length === 0) {
-            $(this).siblings('span.error').text('Please type your full name').fadeIn().parent('.form-group').addClass('hasError');
-            usernameError = true;
-        } else if ($(this).val().length > 1 && $(this).val().length <= 6) {
-            $(this).siblings('span.error').text('Please type at least 6 characters').fadeIn().parent('.form-group').addClass('hasError');
-            usernameError = true;
-        } else {
-            $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-            usernameError = false;
-        }
-    }
-
-    // PassWord
-    if ($(this).hasClass('pass')) {
-        if ($(this).val().length < 8) {
-            $(this).siblings('span.error').text('Please type at least 8 charcters').fadeIn().parent('.form-group').addClass('hasError');
-            passwordError = true;
-        } else {
-            $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-            passwordError = false;
-        }
-    }
-
-    // PassWord confirmation
-    if ($('.pass').val() !== $('.passConfirm').val()) {
-        $('.passConfirm').siblings('.error').text('Passwords don\'t match').fadeIn().parent('.form-group').addClass('hasError');
-        passConfirm = false;
-    } else {
-        $('.passConfirm').siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-        passConfirm = false;
-    }
-
-    // label effect
-    if ($(this).val().length > 0) {
-        $(this).siblings('label').addClass('active');
-    } else {
-        $(this).siblings('label').removeClass('active');
-    }
-});
-
-
-// form switch
-$('a.switch').click(function (e) {
-    $(this).toggleClass('active');
-    e.preventDefault();
-
-    if ($('a.switch').hasClass('active')) {
-        $(this).parents('.form-peice').addClass('switched').siblings('.form-peice').removeClass('switched');
-    } else {
-        $(this).parents('.form-peice').removeClass('switched').siblings('.form-peice').addClass('switched');
-    }
-});
-
-
-// Form submit
-$('form.signup-form').submit(function (event) {
-    event.preventDefault();
-
-    if (usernameError == true || emailError == true || passwordError == true || passConfirm == true) {
-        $('.name, .email, .pass, .passConfirm').blur();
-    } else {
-        $('.signup, .login').addClass('switched');
-
-        setTimeout(function () { $('.signup, .login').hide(); }, 700);
-        setTimeout(function () { $('.brand').addClass('active'); }, 300);
-        setTimeout(function () { $('.heading').addClass('active'); }, 600);
-        setTimeout(function () { $('.success-msg p').addClass('active'); }, 900);
-        setTimeout(function () { $('.success-msg a').addClass('active'); }, 1050);
-        setTimeout(function () { $('.form').hide(); }, 700);
-    }
-});
-
-// Reload page
-$('a.profile').on('click', function () {
-    location.reload(true);
-}); -->
-
-
-});
-
-
-<!-- </script> -->
-
 <style>
 
-.span.error{
-      color: crimson;
-      font-family:PreM;
-      font-size: 12px;
-      position: absolute;
-      bottom: -20px;
-      right: 0;
-      display: none;
+
+/* 테스트 */
+#form
+{
+background-color: transparent;
+}
+.signup_back{
+  background-image: url(../assets/movie_back.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 900px;
+
+}
+.main{
+	position: fixed;
+	width: 350px;
+	height: 500px;
+	overflow: hidden;
+	border-radius: 5rem;
+	box-shadow: 1rem 4rem 8rem #000;
+  left: 40%;
+  margin-top:2rem;
+}
+
+.label_sign{
+  font-family:PreM;
+	color: #fff;
+	font-size: 2rem;
+	justify-content: center;
+	display: flex;
+	margin: 60px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+.input_sign{
+	width: 60%;
+	height: 2rem;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 0.5rem;
+  font-family:NeoBD;
+
+}
+.button_sign{
+  font-family:PreT;
+	width: 60%;
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #fff;
+	background: #0142bb;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 20px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+  background-color: transparent;
+}
+.button_sign:hover{
+	background: #226efc;
 }
 
 </style>

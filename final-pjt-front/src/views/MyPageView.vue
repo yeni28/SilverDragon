@@ -1,13 +1,12 @@
 <template>
-  <div>
+  <div class="mypage_wrap">
     <div class="mypage">
       <div class="profile_area">
         <!-- 이미지 -->
         <div class="user_profile_box">
           <img class="user_profile_img" src="../assets/default_source/cat.jpg" alt="profile">
         </div>
-        <!-- 이름 //username 불러오기 수정 필요함-->
-        <div class="user_name"> {{commentLists[0].user.username}} </div>
+        <div class="user_name"> {{user_data.username}} 님 </div>
         <br>
         <!-- 선택 -->
         <button class="btn btn-success"> 내가 쓴 댓글 </button> <br>
@@ -15,9 +14,11 @@
       </div>
 
       <div class="mycontent">
-        <div @click="likeMovielist()">
-          콘텐츠 들어갈 자리
-        </div>
+        <MovieCollection
+        v-for="movie_list in userMovieList"
+        :key="movie_list.id"
+        :movie_list=movie_list
+        />
 <!-- 
         <div
         v-for="comment in commentLists"
@@ -34,13 +35,23 @@
 
 <script>
 import axios from 'axios'
+import MovieCollection from '@/components/MovieCollection.vue'
+
 export default {
     name:'MyPageView',
     data(){
       return{
+        user_data:null,
         commentLists:null,
-        like_movie_list:null,
       }
+    },
+    computed:{
+      userMovieList(){
+            return this.$store.state.user_movie_list;
+        }
+    },
+    components:{
+      MovieCollection
     },
     methods:{
       commentList(){
@@ -55,10 +66,23 @@ export default {
         })
         .catch((err)=>console.log(err))
       },
+      userProfile(){
+        axios({
+          method:'get',
+          url:"http://127.0.0.1:8000/accounts/profile/",
+          headers:{ 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+        })
+        .then((res)=>{
+          this.user_data = res.data
+        })
+        .catch((err)=>console.log(err))
+      }
       
     },
     created(){
+      this.userProfile()
       this.commentList()
+      
     }
 }
 </script>
@@ -93,7 +117,7 @@ export default {
   object-fit: cover;
 }
 .user_name{
-  font-family: NeoRG;
+  font-family: PreS;
   font-size: 1.5rem;
   margin-top:0.5rem;
 }
@@ -107,4 +131,8 @@ export default {
 
 }
 
+/* 배경 */
+.mypage_wrap{
+  background-image: url('../assets/profile_back.jpg');
+}
 </style>
