@@ -130,6 +130,14 @@ nav a:hover {
   font-family: "PreS";
   src: url("../src/assets/fonts/Pretendard-SemiBold.otf");
 }
+@font-face {
+  font-family: "PreL";
+  src: url("../src/assets/fonts/Pretendard-Light.otf");
+}
+@font-face {
+  font-family: "PreT";
+  src: url("../src/assets/fonts/Pretendard-Thin.otf");
+}
 
 .dinone {
   display: none;

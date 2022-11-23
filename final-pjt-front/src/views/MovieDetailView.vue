@@ -145,7 +145,7 @@
           </div>
           <!-- 댓글 작성 -->
           <!-- 코멘트 모달 테스트 -->
-          <div style="background: transparent">
+          <div style="background: transparent; " >
             <button
               type="button"
               class="button btn_write"
@@ -161,6 +161,7 @@
               tabindex="-1"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
+              style="background-color : rgba(0,0,0,0.3);"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -223,7 +224,7 @@
                         class="form-control"
                         id="message-text"
                         style="font-family: NeoRG"
-                        placeholder="댓글을 작성해주세요"
+                        placeholder="댓글을 작성해주세요!"
                         v-model="movie_comment"
                       ></textarea>
                     </div>
@@ -251,18 +252,33 @@
             </div>
           </div>
 
-          <!-- 좋아요 버튼  -->
+          <!-- 컬렉션 버튼  -->
           <div style="background-color: transparent">
             <button @click="modal_click" class="btn_like">+</button>
             <div class="modal_like" id="modal_like">
+              <!-- 헤더로 -->
+              <div class="like_header" style="background-color: transparent">
+                <div class="like_title">
+                    🛒 컬렉션에 담기
+                </div>
+              <!-- 닫기 버튼 -->
+                <div style="background-color: transparent; ">
+                  <button
+                    @click="modal_click"
+                    type="button"
+                    class="btn like_btn_close"
+
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
               <!-- 컬렉션 체크 리스트로 -->
               <div
                 id="checklist"
                 style="margin: 1rem; background-color: transparent"
               >
-                <span style="font-family: PreR; font-size: 1.2rem">
-                  🛒 컬렉션에 담기
-                </span>
+
                 <movie-list-check
                   class="form-check"
                   v-for="movie_list in user_movie_list"
@@ -273,37 +289,32 @@
                 </movie-list-check>
               </div>
               <!-- 새 컬렉션 만들기 -->
-              <div>
+              <div style="background-color: transparent;">
                 <button
                   @click="collection_click"
-                  style="color: white; font-family: NeoBD"
+                  class="btn_crate_collection"
                 >
-                  새 컬렉션 만들기
+                  새 컬렉션
                 </button>
                 <!-- 컬렉션 입력 받기 -->
                 <div class="create_collection" id="create_collection">
-                  이름
+                  <label class="create_collection_label">Collection Name</label><br>
                   <input
                     @keyup.enter="likeMovieNew"
                     type="text"
                     v-model="collection_title"
-                    placeholder="재생목록 이름 입력"
+                    placeholder="컬렉션 제목을 입력하세요."
                     style="color: white"
                   />
-                  <hr />
+                  <div class="create_title_btn"> 
+                    <span  @click="likeMovieNew" style="font-family: PreB;font-size:0.8vW; 
+                    background-color: transparent; padding:0.1rem; margin:0;">
+                      생성 
+                    </span>
+                  </div>
                 </div>
               </div>
-              <!-- 닫기 버튼 -->
-              <div style="background-color: transparent">
-                <button
-                  @click="modal_click"
-                  type="button"
-                  class="btn btn-secondary"
-                  style="font-family: NeoBD; border: none; border-radius: 1rem"
-                >
-                  닫기
-                </button>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -882,18 +893,81 @@ a.button {
   display: block;
   visibility: hidden;
   z-index: 200;
-  top: 60%;
-  left: 69%;
-  width: 20%;
-  height: 35%;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: auto;
+  height: auto;
+  bottom: 5%;
+  background-color:#121213;
   border-radius: 10%;
-  box-shadow: 1px 1px 1px rgba(5, 5, 5, 0.5);
+  box-shadow: 3px 3px 10px rgba(5, 5, 5, 0.5);
 }
 
 /* 새로운 컬렉션 추가하기 */
 .create_collection {
   display: block;
   visibility: hidden;
+  margin-top: 1rem;
+}
+.like_header{
+background-color: transparent;
+display:flex;
+font-size:20px;
+padding: 0.5rem;
+}
+.like_title{
+  left:1rem;
+  font-family: PreR; 
+  font-size: 1.4vW;
+  background-color: transparent; 
+  margin-left:4vW;
+}
+.like_btn_close{
+  background-color:rgb(250, 250, 250); 
+  font-family: NeoBD; 
+  border: none;
+  border-radius: 1rem;
+  margin-left:1vW;
+}
+.btn_crate_collection{
+  color: rgb(255, 255, 255); 
+  font-family: PreM; 
+  font-size: 1rem;
+  border:none;
+  border-radius: 8rem;
+  width:7rem;
+  height: 2rem;
+  background-color: #226efc;
+}
+.create_collection_label{
+  font-family: NeoLT; 
+  font-size: 0.2vW;
+  color: #6C6C6C;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.create_title_btn{
+  color: #226efc;
+  text-align: right;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+.create_title_btn:hover {
+  color:white;
+}
+input[type=text] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #226efc;
+  border-top: 0px;
+  border-radius: 0px;
+  font-family: NeoLT; 
+  font-weight: bold;
+  outline: 0;
+  margin-bottom: 20px;
+  padding-left: 0px;
+  color: #ECF0F5;
+}
+::placeholder{
+  font-size:0.8vW;
+  margin:auto;
 }
 </style>
