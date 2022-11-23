@@ -16,7 +16,6 @@
 import axios from 'axios'
 import MovieCollectionCard from './MovieCollectionCard.vue';
 
-
 export default {
     components: { MovieCollectionCard },
     name:'MovieCollection',

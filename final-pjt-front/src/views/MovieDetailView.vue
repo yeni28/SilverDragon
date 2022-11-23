@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="detail" >
+    <div class="detail">
       <!-- 배경 포스터 -->
       <div>
         <img
@@ -62,6 +62,12 @@
             <!-- 감독  -->
             <div
               class="director"
+              @click="
+                search_director(
+                  movie_detail.director[0].id,
+                  movie_detail.director[0].name
+                )
+              "
               style="
                 float: left;
                 display: inline-block;
@@ -102,6 +108,7 @@
                 v-for="actor in movie_detail.actor"
                 :key="actor.id"
                 class="profile"
+                @click="search_actor(actor.id, actor.name)"
               >
                 <div class="profile_box">
                   <img
@@ -264,7 +271,7 @@
                   <button
                     @click="modal_click"
                     class="btn like_btn_close"
-                    style="color:white;"
+                    style="color: white"
                   >
                     X
                   </button>
@@ -420,8 +427,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          window.open(`https://www.themoviedb.org/movie/${movie_pk}`)
-          this.$router.push({name:'home'})
+          window.open(`https://www.themoviedb.org/movie/${movie_pk}`);
+          this.$router.push({ name: "home" });
         });
     },
     movieComment(movie_pk) {
@@ -517,7 +524,7 @@ export default {
         .then(() => {
           this.$store.commit("like_movie_list");
           this.collection_title = null;
-          this.collection_click()
+          this.collection_click();
         })
         .catch((err) => console.log(err));
     },
@@ -525,14 +532,47 @@ export default {
       console.log(similar_movie_pk);
     },
     // 컬렉션 추가 메세지
-    addList(addmsg){
-        if(!addmsg){
-            alert("컬렉션에 담겼습니다.")
-        }
-        else{
-            alert("컬렉션에서 삭제되었습니다.")
-        }
-    }
+    addList(addmsg) {
+      if (!addmsg) {
+        alert("컬렉션에 담겼습니다.");
+      } else {
+        alert("컬렉션에서 삭제되었습니다.");
+      }
+    },
+    search_director(searchinput, name) {
+      this.$store.commit("movie/SEARCH_INPUT", `감독 ${name}`);
+      axios({
+        method: "GET",
+        url: `http://127.0.0.1:8000/movies/director/${searchinput}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("movie/SEARCHRES", res.data);
+        })
+        .then(() => {
+          this.$router.push({ name: "searchview" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    search_actor(searchinput, name) {
+      this.$store.commit("movie/SEARCH_INPUT", `배우 ${name}`);
+      axios({
+        method: "GET",
+        url: `http://127.0.0.1:8000/movies/actor/${searchinput}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("movie/SEARCHRES", res.data);
+        })
+        .then(() => {
+          this.$router.push({ name: "searchview" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 
   created() {
@@ -914,7 +954,7 @@ a.button {
   z-index: 200;
   top: auto;
   height: auto;
-  right:2%;
+  right: 2%;
   bottom: 10%;
   background-color: #121213;
   border-radius: 10%;

@@ -155,3 +155,33 @@ def recommend(request):
         if len(serializer.data) == 0:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+def genre_movie(request, genre_pk):
+    if request.method == 'GET':
+        genre = Genre.objects.get(pk=genre_pk)
+
+
+        movie = genre.movie_set.all()
+        serializer = MovieDetailSerializer(movie, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def actor_movie(request, actor_pk):
+    if request.method == 'GET':
+        actor = Actor.objects.get(pk=actor_pk)
+
+        movie = actor.movie_set.all()
+        serializer = MovieDetailSerializer(movie, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def director_movie(request, director_pk):
+    if request.method == 'GET':
+        director = Director.objects.get(pk=director_pk)
+
+        movie = director.movie_set.all()
+        serializer = MovieDetailSerializer(movie, many=True)
+        return Response(serializer.data)

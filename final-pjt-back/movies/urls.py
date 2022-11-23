@@ -18,4 +18,12 @@ urlpatterns = [
 
     # 코멘트 리스트
     path('comment/', views.commentlist),
+
+    # 장르별
+    path('genre/<int:genre_pk>/', views.genre_movie),
+
+    # 배우별
+    path('actor/<int:actor_pk>/', views.actor_movie),
+    # 감독별
+    path('director/<int:director_pk>/', views.director_movie),
 ]

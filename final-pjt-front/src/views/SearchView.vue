@@ -3,6 +3,8 @@
     <h1>검색결과</h1>
     <div class="recommand_movie1">
       <h3 style="font-family: NeoBD">{{ searchelength }}개의 영화</h3>
+      <h3 style="font-family: NeoBD">{{ searchinput }} 의 검색결과</h3>
+
       <div
         class="row row-cols row-cols-md-5 g-5 outcard"
         style="margin-top: 5px"
@@ -29,7 +31,10 @@ export default {
 		},
 		searchelength() {
 			return this.$store.state.movie.searchres.length
-		}
+		},
+    searchinput() {
+      return this.$store.state.movie.search_input
+    }
 	}
 };
 </script>
