@@ -122,7 +122,6 @@ def likemoviecreate(request, movie_pk, list_pk):
         serializer = LikeMovieListSerializer(movie)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        print('??????qWeqweqweqwe')
         LikeMovieList.objects.get(pk=list_pk).movies.remove(movie)
         serializer = LikeMovieListSerializer(movie)
         return Response(serializer.data)
@@ -147,9 +146,8 @@ def commentlist(request):
 
 @api_view(['POST'])
 def recommend(request):
-
     if request.method =='POST':
-        movies_id = recommande_movie.find_movie(request.data['movie']['title'])
+        movies_id = recommande_movie.resforreco(request.data['movies'])
         movies = Movie.objects.filter(id__in=movies_id)
         serializer = MovieDetailSerializer(movies, many=True)
         return Response(serializer.data)

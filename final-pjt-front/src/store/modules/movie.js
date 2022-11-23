@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from '../../router';
 
 const state = () => {
   return {
@@ -24,6 +25,7 @@ const state = () => {
       "TV 영화": 10770,
     },
     searchmovie: null,
+    recommandation: null,
   };
 };
 
@@ -31,6 +33,9 @@ const getters = {};
 const mutations = {
   SEARCH_MOVIE(state, res) {
     state.searchmovie = res
+  },
+  RECO_MOVIE(state, res) {
+    state.recommandation = res
   },
 };
 const actions = {
@@ -51,12 +56,18 @@ const actions = {
       method: "POST",
       url: 'http://127.0.0.1:8000/movies/recommend/',
       data: {
-        'movie': movie,
+        'movies': movie,
       },
       headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
     })
       .then((res) => {
-        console.log(res.data);
+        if (res.data.length === 0) {
+          return alert('영화를 더 골라주세요.')
+        }
+        context.commit("RECO_MOVIE", res.data)
+      })
+      .then(() => {
+        router.push({ name:'resultrecoview'})
       })
       .catch((err)=>{console.log(err);})
   }

@@ -4,8 +4,11 @@
       <div
         class="card card-container border-0 moviecard"
         style="width: 16rem; height: 24rem"
+        :class="{ ba }"
       >
-        <p class="movie-title">{{ recomovie.title }}</p>
+        <p class="movie-title" :class="{ select: torf }">
+          {{ recomovie.title }}
+        </p>
         <img
           :src="`https://image.tmdb.org/t/p/w500${recomovie.poster_path}`"
           class="card-img-top cardimg"
@@ -21,13 +24,21 @@
 <script>
 export default {
   name: "MovieListitem",
-  props: { recomovie: Object },
+  props: { recomovie: Object, movie_cart: Array },
   methods: {
     recommand_movie(movie) {
-      this.$store.dispatch("movie/recommand_movie", movie);
+      this.$emit("cart", movie);
     },
   },
-  created() {},
+  computed: {
+    torf() {
+      const res = this.movie_cart.some((x) => {
+        console.log(x);
+        return x.title === this.recomovie.title;
+      });
+      return res;
+    },
+  },
 };
 </script>
 
@@ -81,7 +92,13 @@ export default {
   opacity: 1;
   color: white;
   word-break: keep-all;
+  /* z-index: 5 ; */
+}
 
+.select {
+  opacity: 1;
+  color: white;
+  word-break: keep-all;
   /* z-index: 5 ; */
 }
 </style>

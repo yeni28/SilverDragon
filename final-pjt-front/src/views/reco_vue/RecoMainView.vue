@@ -18,10 +18,20 @@
       </button>
       <button class="btn btn-outline-secondary" type="button">없어요!</button>
     </div>
-
+    <div>
+      <div v-for="cart_list in movie_cart" :key="cart_list.id">
+        <p>
+          {{ cart_list.title }}
+        </p>
+        <button type="button" class="btn btn-primary" @click="cart(cart_list)">삭제</button>
+      </div>
+      <button type="button" class="btn btn-success" v-if="movie_cart.length" @click="recomive">영화 추천!</button>
+    </div>
     <div>
       <div class="recommand_movie1">
-        <h3 style="font-family: NeoBD" v-if="search_list">영화를 골라주세요!</h3>
+        <h3 style="font-family: NeoBD" v-if="search_list">
+          영화를 골라주세요!
+        </h3>
         <div
           class="row row-cols row-cols-md-5 g-5 outcard"
           style="margin-top: 5px"
@@ -30,7 +40,8 @@
             v-for="recomovie in search_list"
             :key="recomovie.id"
             :recomovie="recomovie"
-						@click="recommand_movie(removie)"
+            :movie_cart = "movie_cart"
+            @cart="cart"
           />
         </div>
       </div>
@@ -39,13 +50,14 @@
 </template>
 
 <script>
-import MovieListItem from '../../components/MovieListItem.vue';
+import MovieListItem from "../../components/MovieListItem.vue";
 export default {
   components: { MovieListItem },
   name: "RecoMainView",
   data() {
     return {
       input_value: null,
+      movie_cart: [],
     };
   },
   computed: {
@@ -59,6 +71,20 @@ export default {
   methods: {
     find_movie() {
       this.$store.dispatch("movie/search_movie", this.input_value);
+    },
+    cart(movie) {
+      if (this.movie_cart.indexOf(movie) === -1) {
+        if (this.movie_cart.length === 7) {
+          return alert('7개만 선택해 주세요!')
+        }
+        this.movie_cart.push(movie);
+      } else {
+        this.movie_cart.splice(this.movie_cart.indexOf(movie), 1);
+      }
+    },
+    recomive() {
+      this.$store.dispatch('movie/recommand_movie', this.movie_cart)
+      
     },
   },
 };

@@ -197,7 +197,7 @@ $('a.profile').on('click', function () {
 
 .span.error{
       color: crimson;
-      font-family:;
+      font-family:PreM;
       font-size: 12px;
       position: absolute;
       bottom: -20px;

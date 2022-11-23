@@ -502,6 +502,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
+    similar_detail(similar_movie_pk) {
+      console.log(similar_movie_pk);
+    },
   },
 
   created() {
