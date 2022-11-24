@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container_disable">
     <nav>
       <router-link to="/">메인</router-link> |
       <router-link :to="{ name: 'recomaintview' }">영화 추천</router-link> |
@@ -21,13 +21,13 @@
       </span>
     </nav>
     <router-view />
-    <loading-spinner  :loading="!isLoading"/>
+    <loading-spinner :loading="!isLoading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import LoadingSpinner from './components/LoadingSpinner.vue';
+import LoadingSpinner from "./components/LoadingSpinner.vue";
 export default {
   components: { LoadingSpinner },
   name: "app",
@@ -53,7 +53,7 @@ export default {
         url: `http://127.0.0.1:8000/movies/search/${this.searchinput}/`,
       })
         .then((res) => {
-          this.$store.commit("movie/SEARCH_INPUT", this.searchinput)
+          this.$store.commit("movie/SEARCH_INPUT", this.searchinput);
           this.$store.commit("movie/SEARCHRES", res.data);
         })
         .then(() => {
@@ -67,38 +67,40 @@ export default {
         });
     },
     setLoading(isLoading) {
-      console.log('thisisloading', isLoading);
+      console.log("thisisloading", isLoading);
       if (isLoading) {
-        this.isLoading = true
-        console.log('inIf', isLoading);
+        this.isLoading = true;
+        console.log("inIf", isLoading);
       }
       if (!isLoading) {
-        this.isLoading = false
+        this.isLoading = false;
       }
-    }
+    },
   },
   created() {
     this.islogin();
     axios.interceptors.request.use(
-      config =>{
-        this.setLoading(false)
-        return config
+      (config) => {
+        this.setLoading(false);
+        return config;
       },
-      error => {
-        this.setLoading(false)
-        return Promise.reject(error)
+      (error) => {
+        this.setLoading(false);
+        console.log('here1');
+        return Promise.reject(error);
       }
     ),
       axios.interceptors.response.use(
-        response => {
-          this.setLoading(true)
-          return response
+        (response) => {
+          this.setLoading(true);
+          return response;
         },
-        error => {
-          this.setLoading(false)
-          return Promise.reject(error)
+        (error) => {
+          this.setLoading(false);
+          console.log('here2');
+          return Promise.reject(error);
         }
-      )
+      );
   },
 };
 </script>
@@ -183,5 +185,9 @@ nav a:hover {
 
 .dinone {
   display: none;
+}
+.container-disable {
+  opacity: 0;
+  pointer-events: none;
 }
 </style>
