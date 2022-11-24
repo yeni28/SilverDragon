@@ -19,6 +19,8 @@ urlpatterns = [
 
     # 코멘트 리스트
     path('comment/', views.commentlist),
+    # 코멘트 삭제
+    path('comment/<int:comment_pk>/', views.commentdelete),
 
     # 장르별
     path('genre/<int:genre_pk>/', views.genre_movie),

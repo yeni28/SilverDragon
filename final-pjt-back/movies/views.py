@@ -148,7 +148,12 @@ def commentlist(request):
         serializer = MovieCommentSerializer(comment, many=True)
         return Response(serializer.data)
 
-
+@api_view(['DELETE'])
+def commentdelete(request, comment_pk):
+    if request.method == 'DELETE':
+        comment = get_object_or_404(MovieComment, pk=comment_pk)
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
