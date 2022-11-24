@@ -45,10 +45,10 @@
               </div>
               <div class="flex justify-center py-4 lg:pt-4 pt-8" style="background-color:transparent">
                 <div class="mr-4 p-3 text-center" style="background-color:transparent">
-                  <span class="text-xl  block uppercase tracking-wide text-blueGray-600" style="background-color:transparent">3</span><span class="text-sm text-blueGray-400" style="font-family:PreM;background-color:transparent;">댓글</span>
+                  <span class="text-xl  block uppercase tracking-wide text-blueGray-600" style="background-color:transparent">{{commentListsLength}}</span><span class="text-sm text-blueGray-400" style="font-family:PreM;background-color:transparent;">댓글</span>
                 </div>
                 <div class="mr-4 p-3 text-center" style="background-color:transparent">
-                  <span class="text-xl block uppercase tracking-wide text-blueGray-600" style="background-color:transparent" >6</span><span class="text-sm text-blueGray-400" style="font-family:PreM;background-color:transparent;">컬렉션</span>
+                  <span class="text-xl block uppercase tracking-wide text-blueGray-600" style="background-color:transparent" >{{userMovieListLength}}</span><span class="text-sm text-blueGray-400" style="font-family:PreM;background-color:transparent;">컬렉션</span>
                 </div>
               </div>
             </div>
@@ -117,16 +117,20 @@ export default {
       return{
         user_data:null,
         commentLists:null,
+        commentListsLength:null,
       }
     },
     computed:{
       userMovieList(){
             return this.$store.state.user_movie_list;
-        }
+      },
+      userMovieListLength() {
+        return this.$store.state.user_movie_list.length
+      },
     },
     components:{
       MovieCollection,
-        MovieCommentList
+      MovieCommentList,
     },
     methods:{
       commentList(){
@@ -138,6 +142,7 @@ export default {
         .then((res)=>{
           console.log(res)
           this.commentLists = res.data
+          this.commentListsLength = res.data.length
         })
         .catch((err)=>{
           console.log('commenterror');

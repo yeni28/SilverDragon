@@ -63,18 +63,18 @@ export default new Vuex.Store({
                 state.user_movie = res.data
                 console.log(res.data);
               })
-          })
-          .catch(() => {
-            axios({
-              method: "get",
-              url: "http://127.0.0.1:8000/movies/nothing/",
-            })
-              .then(() => {
-              })
-              .catch((err) => {
-                console.log(err);
+              .catch(() => {
+                axios({
+                  method: "get",
+                  url: "http://127.0.0.1:8000/movies/nothing/",
+                })
+                  .then(() => {
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               });
-          });
+          })
       } else {
         state.is_logined = false;
       }

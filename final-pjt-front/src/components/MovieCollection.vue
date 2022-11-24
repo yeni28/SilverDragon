@@ -53,17 +53,31 @@ export default {
     },
     methods:{
     deletelist() {
-        axios({
-            method: "delete",
-            url: `http://127.0.0.1:8000/movies/likemovielist/${this.movie_id}/append/${this.movie_list.id}/`,
-            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
-        })
-            .then(() => {
-            this.$store.commit("like_movie_list");
+        if (this.movie_id) {
+            axios({
+                method: "delete",
+                url: `http://127.0.0.1:8000/movies/likemovielist/${this.movie_id}/append/${this.movie_list.id}/`,
+                headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
             })
-            .catch((err) => {
-            console.log(err);
-            });
+                .then(() => {
+                this.$store.commit("like_movie_list");
+                })
+                .catch((err) => {
+                console.log(err);
+                });
+        } else {
+            axios({
+                method: "delete",
+                url: `http://127.0.0.1:8000/movies/likemovielist/259694/append/${this.movie_list.id}/`,
+                headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` },
+            })
+                .then(() => {
+                this.$store.commit("like_movie_list");
+                })
+                .catch((err) => {
+                console.log(err);
+                });
+        }
     },
     }
 }

@@ -31,7 +31,7 @@
 
 <script>
 export default {
-    nmae:'MovieCommentList',
+    name:'MovieCommentList',
     props:{
         comment:Object
     }
