@@ -42,6 +42,7 @@
             class="movie_genre"
             v-for="genre in movie_detail.genres"
             :key="genre.id"
+            @click="search_genre(genre.id, genre.name)"
           >
             <button class="genre_btn">{{ genre.name }}</button>
           </div>
@@ -561,6 +562,23 @@ export default {
       axios({
         method: "GET",
         url: `http://127.0.0.1:8000/movies/actor/${searchinput}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("movie/SEARCHRES", res.data);
+        })
+        .then(() => {
+          this.$router.push({ name: "searchview" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    search_genre(id, name) {
+      this.$store.commit("movie/SEARCH_INPUT", `장르 ${name}`);
+      axios({
+        method: "GET",
+        url: `http://127.0.0.1:8000/movies/genre/${id}/`,
       })
         .then((res) => {
           console.log(res.data);
