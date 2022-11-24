@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       searchinput: null,
-      isLoading: false
+      isLoading: true,
     };
   },
   computed: {
@@ -117,6 +117,7 @@ export default {
 
 nav {
   padding: 30px;
+  /* margin-bottom: -2.5rem; */
 }
 
 nav a {
@@ -138,10 +139,7 @@ nav a:hover {
   border: #e0e0e0;
 }
 
-@font-face {
-  font-family: "NeoHV";
-  src: url("../src/assets/fonts/NanumSquareNeoOTF-eHv.otf");
-}
+
 @font-face {
   font-family: "NeoEB";
   src: url("../src/assets/fonts/NanumSquareNeoOTF-dEb.otf");
