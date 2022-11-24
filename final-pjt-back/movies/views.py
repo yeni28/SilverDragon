@@ -18,7 +18,7 @@ from .models import *
 @api_view(['GET', 'POST'])
 def home_movies(request):
     if request.method == 'GET':
-        movies = Movie.objects.all().order_by('?')[:4]
+        movies = Movie.objects.all().order_by('?')[:5]
 
         serializer = HomeMovieSerializer(movies, many=True)
         return Response(serializer.data)
@@ -206,10 +206,10 @@ def onscreen(request):
     if request.method == 'GET':
         now = datetime.now()
         before_one_month = now - relativedelta(weeks=2)
-        after_one_month = now + relativedelta(months=1)
+        after_one_month = now - relativedelta(days=1)
         before_one_month = before_one_month.strftime('%Y-%m-%d')
-        after_one_month = now.strftime('%Y-%m-%d')
+        after_one_month = after_one_month.strftime('%Y-%m-%d')
         print(before_one_month, after_one_month)
-        movies = Movie.objects.filter(release_date__range=[before_one_month, after_one_month]).order_by('-release_date')
+        movies = Movie.objects.filter(release_date__range=[before_one_month, after_one_month]).order_by('-release_date')[:10]
         serializer = HomeMovieSerializer(movies, many=True)
         return Response(serializer.data)
