@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="detail" >
+    <div class="detail">
       <!-- 배경 포스터 -->
       <div>
         <img
@@ -9,337 +9,344 @@
           alt=""
         />
       </div>
-      <div style="display:block;">
-        <!-- movie 기본 정보 -->
-        <div class="info">
-            <!-- 포스터 -->
-            <div style="background-color: transparent">
-            <img
-                class="poseterimg"
-                v-if="movie_detail.poster_path"
-                :src="`https://image.tmdb.org/t/p/original${movie_detail?.poster_path}`"
-                alt=""
-            />
-            <img v-else src="../assets/null_image.jpg" class="d_profile_img" />
-            </div>
 
-            <!-- 이미지 외 텍스트 정보 -->
-            <div class="info_text">
-            <span class="detail_title"> {{ movie_detail?.title }} </span>
-            <br />
-            <!-- 연도 및 평점 -->
-            <div class="date">
-                {{ movie_detail?.release_date.substr(0, 4) }}
-            </div>
-            <div class="vote">
-                ★ {{ movie_detail?.vote_average }}
-                <span class="vote" style="font-size: 0.5rem; font-family: NeoLT">
-                (TMDB)
-                </span>
-            </div>
-            <!-- 장르 -->
-            <div
-                class="movie_genre"
-                v-for="genre in movie_detail.genres"
-                :key="genre.id"
-            >
-                <button class="genre_btn">{{ genre.name }}</button>
-            </div>
-            <br />
-            <br />
-            <!-- 줄거리 -->
-            <details v-if="movie_detail.overview">
-                <summary style="font-family: PreR; font-size: 1rem">줄거리</summary>
-                <div class="overview">
-                {{ movie_detail?.overview }}
-                </div>
-            </details>
-            <div v-else class="none_overview"></div>
-            <hr style="margin-top: 5rem; width: 50rem" />
-
-            <!-- 스태프-->
-            <div class="staff">
-                <!-- 감독  -->
-                <div
-                class="director"
-                style="
-                    float: left;
-                    display: inline-block;
-                    background-color: transparent;
-                "
-                >
-                <div class="staff_title">감독</div>
-                <div class="d_profile">
-                    <div class="d_profile_box">
-                    <img
-                        v-if="movie_detail.director[0].profile_path"
-                        class="d_profile_img"
-                        :src="`https://image.tmdb.org/t/p/original${movie_detail.director[0]?.profile_path}`"
-                        alt=""
-                    />
-                    <img
-                        v-else
-                        src="../assets/none-profile.png"
-                        class="d_profile_img"
-                    />
-                    </div>
-                    <div class="d_profile_name">
-                    {{ movie_detail.director[0].name }}
-                    </div>
-                </div>
-                </div>
-                <!-- 배우 -->
-                <div
-                class="actor"
-                style="
-                    display: inline-block;
-                    float: left;
-                    background-color: transparent;
-                "
-                >
-                <div class="staff_title">출연</div>
-                <div
-                    v-for="actor in movie_detail.actor"
-                    :key="actor.id"
-                    class="profile"
-                >
-                    <div class="profile_box">
-                    <img
-                        v-if="actor?.profile_path"
-                        class="profile_img"
-                        :src="`https://image.tmdb.org/t/p/original${actor?.profile_path}`"
-                        alt=""
-                    />
-                    <img
-                        v-else
-                        src="../assets/none-profile.png"
-                        class="profile_img"
-                    />
-                    </div>
-                    <div class="profile_name">
-                    {{ actor?.name }}
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <!-- 사이드 바 -->
-            <div class="sidebar">
-            <!-- 영상보기 -->
-            <div>
-                <a
-                href="#"
-                title="Button border orange"
-                class="button btnFloat_trailer btnOrange"
-                ></a>
-            </div>
-            <!-- 댓글 보기 -->
-            <div>
-                <a
-                href="#comments"
-                title="Button border orange"
-                class="button btnFloat_comment btnOrange"
-                ></a>
-                <!-- <button onclick="location.href='#comments'"> 댓글 보기 </button> -->
-            </div>
-            <!-- 댓글 작성 -->
-            <!-- 코멘트 모달 테스트 -->
-            <div style="background: transparent">
-                <button
-                type="button"
-                class="button btn_write"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                data-bs-whatever="@getbootstrap"
-                >
-                🖊️댓글 작성
-                </button>
-                <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-                style="background-color: rgba(0, 0, 0, 0.3)"
-                >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h1
-                        class="modal-title fs-5"
-                        id="exampleModalLabel"
-                        style="font-family: NeoLT"
-                        >
-                        ✒️Movie Comments
-                        </h1>
-                        <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                        style="background-color: white"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <div
-                        style="
-                            font-family: NeoBD;
-                            font-size: 2rem;
-                            margin-bottom: 1rem;
-                        "
-                        >
-                        {{ movie_detail?.title }}
-                        </div>
-                        <div class="mb-3">
-                        <div
-                            @mouseleave="showCurrentRating(0)"
-                            style="display: inline-block"
-                        >
-                            <star-rating
-                            :star-size="30"
-                            :show-rating="false"
-                            @current-rating="showCurrentRating"
-                            @rating-selected="setCurrentSelectedRating"
-                            :increment="0.5"
-                            ></star-rating>
-                        </div>
-                        <span style="margin-left: 1rem; font-family: NeoLT">{{
-                            currentRating
-                        }}</span>
-                        <div>
-                            <label
-                            for="recipient-name"
-                            class="col-form-label"
-                            style="font-family: NeoLT; color: lightgray"
-                            >별점을 선택하세요</label
-                            >
-                            <br />
-                        </div>
-                        </div>
-                        <hr />
-                        <div class="mb-3">
-                        <label for="message-text" class="col-form-label"></label>
-                        <textarea
-                            class="form-control"
-                            id="message-text"
-                            style="font-family: NeoRG"
-                            placeholder="댓글을 작성해주세요!"
-                            v-model="movie_comment"
-                        ></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                        style="font-family: NeoBD; border-radius: 1rem"
-                        >
-                        닫기
-                        </button>
-                        <button
-                        class="btn btn-primary"
-                        style="font-family: NeoBD; border-radius: 1rem"
-                        @click="movieComment(movie_detail?.id)"
-                        data-bs-dismiss="modal"
-                        >
-                        작성
-                        </button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <!-- 컬렉션 버튼  -->
-            <div style="background-color: transparent">
-                <button @click="modal_click" class="btn_like">+</button>
-                <div class="modal_like" id="modal_like">
-                <!-- 헤더로 -->
-                <div class="like_header" style="background-color: transparent">
-                    <div class="like_title">🛒 컬렉션에 담기</div>
-                    <!-- 닫기 버튼 -->
-                    <div style="background-color: transparent">
-                    <button
-                        @click="modal_click"
-                        class="btn like_btn_close"
-                        style="color:white;"
-                    >
-                        X
-                    </button>
-                    </div>
-                </div>
-                <!-- 컬렉션 체크 리스트로 -->
-                <div
-                    id="checklist"
-                    style="margin: 1rem; background-color: transparent"
-                >
-                    <movie-list-check
-                    class="form-check"
-                    v-for="movie_list in user_movie_list"
-                    :key="movie_list.id"
-                    :movie_list="movie_list"
-                    :movie_id="movie_detail.id"
-                    @add-list="addList"
-                    >
-                    </movie-list-check>
-                </div>
-                <!-- 새 컬렉션 만들기 -->
-                <div style="background-color: transparent">
-                    <button @click="collection_click" class="btn_crate_collection">
-                    새 컬렉션
-                    </button>
-                    <!-- 컬렉션 입력 받기 -->
-                    <div class="create_collection" id="create_collection">
-                    <label class="create_collection_label">Collection Name</label
-                    ><br />
-                    <input
-                        class="input_title"
-                        @keyup.enter="likeMovieNew"
-                        type="text"
-                        v-model="collection_title"
-                        placeholder="컬렉션 제목을 입력하세요."
-                        style="color: white"
-                    />
-                    <div class="create_title_btn">
-                        <span
-                        @click="likeMovieNew"
-                        style="
-                            font-family: PreB;
-                            font-size: 0.8vw;
-                            background-color: transparent;
-                            padding: 0.1rem;
-                            margin: 0;
-                        "
-                        >
-                        생성
-                        </span>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div></div>
+      <!-- movie 기본 정보 -->
+      <div class="info">
+        <!-- 포스터 -->
+        <div style="background-color: transparent">
+          <img
+            class="poseterimg"
+            v-if="movie_detail.poster_path"
+            :src="`https://image.tmdb.org/t/p/original${movie_detail?.poster_path}`"
+            alt=""
+          />
+          <img v-else src="../assets/null_image.jpg" class="d_profile_img" />
         </div>
+
+        <!-- 이미지 외 텍스트 정보 -->
+        <div class="info_text">
+          <span class="detail_title"> {{ movie_detail?.title }} </span>
+          <br />
+          <!-- 연도 및 평점 -->
+          <div class="date">
+            {{ movie_detail?.release_date.substr(0, 4) }}
+          </div>
+          <div class="vote">
+            ★ {{ movie_detail?.vote_average }}
+            <span class="vote" style="font-size: 0.5rem; font-family: NeoLT">
+              (TMDB)
+            </span>
+          </div>
+          <!-- 장르 -->
+          <div
+            class="movie_genre"
+            v-for="genre in movie_detail.genres"
+            :key="genre.id"
+          >
+            <button class="genre_btn">{{ genre.name }}</button>
+          </div>
+          <br />
+          <br />
+          <!-- 줄거리 -->
+          <details v-if="movie_detail.overview">
+            <summary style="font-family: PreR; font-size: 1rem">줄거리</summary>
+            <div class="overview">
+              {{ movie_detail?.overview }}
+            </div>
+          </details>
+          <div v-else class="none_overview"></div>
+          <hr style="margin-top: 5rem; width: 50rem" />
+
+          <!-- 스태프-->
+          <div class="staff">
+            <!-- 감독  -->
+            <div
+              class="director"
+              @click="
+                search_director(
+                  movie_detail.director[0].id,
+                  movie_detail.director[0].name
+                )
+              "
+              style="
+                float: left;
+                display: inline-block;
+                background-color: transparent;
+              "
+            >
+              <div class="staff_title">감독</div>
+              <div class="d_profile">
+                <div class="d_profile_box">
+                  <img
+                    v-if="movie_detail.director[0].profile_path"
+                    class="d_profile_img"
+                    :src="`https://image.tmdb.org/t/p/original${movie_detail.director[0]?.profile_path}`"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    src="../assets/none-profile.png"
+                    class="d_profile_img"
+                  />
+                </div>
+                <div class="d_profile_name">
+                  {{ movie_detail.director[0].name }}
+                </div>
+              </div>
+            </div>
+            <!-- 배우 -->
+            <div
+              class="actor"
+              style="
+                display: inline-block;
+                float: left;
+                background-color: transparent;
+              "
+            >
+              <div class="staff_title">출연</div>
+              <div
+                v-for="actor in movie_detail.actor"
+                :key="actor.id"
+                class="profile"
+                @click="search_actor(actor.id, actor.name)"
+              >
+                <div class="profile_box">
+                  <img
+                    v-if="actor?.profile_path"
+                    class="profile_img"
+                    :src="`https://image.tmdb.org/t/p/original${actor?.profile_path}`"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    src="../assets/none-profile.png"
+                    class="profile_img"
+                  />
+                </div>
+                <div class="profile_name">
+                  {{ actor?.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 사이드 바 -->
+        <div class="sidebar">
+          <!-- 영상보기 -->
+          <div>
+            <a
+              href="#"
+              title="Button border orange"
+              class="button btnFloat_trailer btnOrange"
+            ></a>
+          </div>
+          <!-- 댓글 보기 -->
+          <div>
+            <a
+              href="#comments"
+              title="Button border orange"
+              class="button btnFloat_comment btnOrange"
+            ></a>
+            <!-- <button onclick="location.href='#comments'"> 댓글 보기 </button> -->
+          </div>
+          <!-- 댓글 작성 -->
+          <!-- 코멘트 모달 테스트 -->
+          <div style="background: transparent">
+            <button
+              type="button"
+              class="button btn_write"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@getbootstrap"
+            >
+              🖊️댓글 작성
+            </button>
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+              style="background-color: rgba(0, 0, 0, 0.3)"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1
+                      class="modal-title fs-5"
+                      id="exampleModalLabel"
+                      style="font-family: NeoLT"
+                    >
+                      ✒️Movie Comments
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                      style="background-color: white"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div
+                      style="
+                        font-family: NeoBD;
+                        font-size: 2rem;
+                        margin-bottom: 1rem;
+                      "
+                    >
+                      {{ movie_detail?.title }}
+                    </div>
+                    <div class="mb-3">
+                      <div
+                        @mouseleave="showCurrentRating(0)"
+                        style="display: inline-block"
+                      >
+                        <star-rating
+                          :star-size="30"
+                          :show-rating="false"
+                          @current-rating="showCurrentRating"
+                          @rating-selected="setCurrentSelectedRating"
+                          :increment="0.5"
+                        ></star-rating>
+                      </div>
+                      <span style="margin-left: 1rem; font-family: NeoLT">{{
+                        currentRating
+                      }}</span>
+                      <div>
+                        <label
+                          for="recipient-name"
+                          class="col-form-label"
+                          style="font-family: NeoLT; color: lightgray"
+                          >별점을 선택하세요</label
+                        >
+                        <br />
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label"></label>
+                      <textarea
+                        class="form-control"
+                        id="message-text"
+                        style="font-family: NeoRG"
+                        placeholder="댓글을 작성해주세요!"
+                        v-model="movie_comment"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                      style="font-family: NeoBD; border-radius: 1rem"
+                    >
+                      닫기
+                    </button>
+                    <button
+                      class="btn btn-primary"
+                      style="font-family: NeoBD; border-radius: 1rem"
+                      @click="movieComment(movie_detail?.id)"
+                      data-bs-dismiss="modal"
+                    >
+                      작성
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 컬렉션 버튼  -->
+          <div style="background-color: transparent">
+            <button @click="modal_click" class="btn_like">+</button>
+            <div class="modal_like" id="modal_like">
+              <!-- 헤더로 -->
+              <div class="like_header" style="background-color: transparent">
+                <div class="like_title">🛒 컬렉션에 담기</div>
+                <!-- 닫기 버튼 -->
+                <div style="background-color: transparent">
+                  <button
+                    @click="modal_click"
+                    class="btn like_btn_close"
+                    style="color: white"
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
+              <!-- 컬렉션 체크 리스트로 -->
+              <div
+                id="checklist"
+                style="margin: 1rem; background-color: transparent"
+              >
+                <movie-list-check
+                  class="form-check"
+                  v-for="movie_list in user_movie_list"
+                  :key="movie_list.id"
+                  :movie_list="movie_list"
+                  :movie_id="movie_detail.id"
+                  @add-list="addList"
+                >
+                </movie-list-check>
+              </div>
+              <!-- 새 컬렉션 만들기 -->
+              <div style="background-color: transparent">
+                <button @click="collection_click" class="btn_crate_collection">
+                  새 컬렉션
+                </button>
+                <!-- 컬렉션 입력 받기 -->
+                <div class="create_collection" id="create_collection">
+                  <label class="create_collection_label">Collection Name</label
+                  ><br />
+                  <input
+                    class="input_title"
+                    @keyup.enter="likeMovieNew"
+                    type="text"
+                    v-model="collection_title"
+                    placeholder="컬렉션 제목을 입력하세요."
+                    style="color: white"
+                  />
+                  <div class="create_title_btn">
+                    <span
+                      @click="likeMovieNew"
+                      style="
+                        font-family: PreB;
+                        font-size: 0.8vw;
+                        background-color: transparent;
+                        padding: 0.1rem;
+                        margin: 0;
+                      "
+                    >
+                      생성
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
       </div>
       <!-- 비슷한 영화 -->
-      <div style="position:absolute;">
-        <div 
-        v-if="movie_detail.relate_movie[0]!=blank" 
-        class="similar_movie">
-          <span
+      <div>
+        <div class="similar_movie">
+          <h3
             style="
               font-family: NeoBD;
               background-color: transparent;
-              text-align: left;font-size:2rem;"
-            >
+              text-align: left;
+            "
+          >
             비슷한 영화
-          </span>
+          </h3>
           <div
+            class="row row-cols row-cols-md-3 g-3"
             style="margin-top:5px
-                    background-color:transparent;width:14rem; height:21rem;display:flex;">
+                    background-color:transparent;width:14rem; height:21rem;"
+          >
             <movie-similar-card
               v-for="similar_movie in movie_detail.relate_movie"
               :key="similar_movie.pk"
@@ -347,14 +354,9 @@
             />
           </div>
         </div>
-        <div v-else>
-            <div class="random_reco_movie_list">
-            <p> 만약 비슷한 영화가 없다면 이 글씨가 보일 겁니다.</p>
-            </div>
-        </div>
       </div>
-
     </div>
+    <!-- 재생목록 추가 예정 -->
 
     <!-- 댓글 확인란-->
     <div id="comments" class="comment_box">
@@ -425,8 +427,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          window.open(`https://www.themoviedb.org/movie/${movie_pk}`)
-          this.$router.push({name:'home'})
+          window.open(`https://www.themoviedb.org/movie/${movie_pk}`);
+          this.$router.push({ name: "home" });
         });
     },
     movieComment(movie_pk) {
@@ -522,7 +524,7 @@ export default {
         .then(() => {
           this.$store.commit("like_movie_list");
           this.collection_title = null;
-          this.collection_click()
+          this.collection_click();
         })
         .catch((err) => console.log(err));
     },
@@ -530,14 +532,47 @@ export default {
       console.log(similar_movie_pk);
     },
     // 컬렉션 추가 메세지
-    addList(addmsg){
-        if(!addmsg){
-            alert("컬렉션에 담겼습니다.")
-        }
-        else{
-            alert("컬렉션에서 삭제되었습니다.")
-        }
-    }
+    addList(addmsg) {
+      if (!addmsg) {
+        alert("컬렉션에 담겼습니다.");
+      } else {
+        alert("컬렉션에서 삭제되었습니다.");
+      }
+    },
+    search_director(searchinput, name) {
+      this.$store.commit("movie/SEARCH_INPUT", `감독 ${name}`);
+      axios({
+        method: "GET",
+        url: `http://127.0.0.1:8000/movies/director/${searchinput}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("movie/SEARCHRES", res.data);
+        })
+        .then(() => {
+          this.$router.push({ name: "searchview" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    search_actor(searchinput, name) {
+      this.$store.commit("movie/SEARCH_INPUT", `배우 ${name}`);
+      axios({
+        method: "GET",
+        url: `http://127.0.0.1:8000/movies/actor/${searchinput}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("movie/SEARCHRES", res.data);
+        })
+        .then(() => {
+          this.$router.push({ name: "searchview" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 
   created() {
@@ -553,33 +588,21 @@ export default {
 }
 .backdropimg {
   width: 100%;
-  opacity: 0.25;
+  opacity: 0.2;
   mask-image: linear-gradient(to top, transparent 5%, black 100%);
 }
 .poseterimg {
-  width: 18rem;
+  width: 300px;
   border-radius: 30px;
   background-color: transparent;
 }
 .info {
   position: absolute;
   display: flex;
-  top: 1.5%;
+  top: 2%;
   left: 10rem;
   margin: 5%;
   background-color: transparent;
-}
-/* 비슷한 영화 */
-.similar_movie {
-    background-color: transparent;
-    top: 47rem;
-    margin-left: 10%;
-    
-}
-.random_reco_movie_list{
-    position: absolute;
-    top: 70%;
-    left: 10%;
 }
 
 /* 세부 디테일 */
@@ -790,6 +813,13 @@ details[open] > summary ~ * {
     transform: translate3d(0, 0, 0);
   }
 }
+/* 비슷한 영화 */
+.similar_movie {
+  background-color: transparent;
+  /* position: absolute; */
+  top: 50rem;
+  left: 10rem;
+}
 /* 사이드바 */
 .sidebar {
   /* float: left; */
@@ -924,7 +954,7 @@ a.button {
   z-index: 200;
   top: auto;
   height: auto;
-  right:2%;
+  right: 2%;
   bottom: 10%;
   background-color: #121213;
   border-radius: 10%;

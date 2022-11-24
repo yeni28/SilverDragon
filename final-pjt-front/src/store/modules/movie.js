@@ -27,6 +27,7 @@ const state = () => {
     searchmovie: null,
     recommandation: null,
     searchres: null,
+    search_input: null,
   };
 };
 
@@ -41,9 +42,13 @@ const mutations = {
   SEARCHRES(state, res) {
     state.searchres = res
   },
+  SEARCH_INPUT(state, searchinput) {
+    state.search_input = searchinput
+  }
 };
 const actions = {
   search_movie(context, searchinput) {
+    context.commit('SEARCH_INPUT', searchinput)
     axios({
       method: "GET",
       url: `http://127.0.0.1:8000/movies/search/${searchinput}/`,

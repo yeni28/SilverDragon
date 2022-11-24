@@ -12,7 +12,6 @@
         @keyup.enter="search_movie"
       />
       |
-
       <span :class="{ dinone: is_logined }">
         <router-link to="/login">로그인</router-link> |
         <router-link to="/signup">회원 가입</router-link>
@@ -22,16 +21,20 @@
       </span>
     </nav>
     <router-view />
+    <loading-spinner  :loading="!isLoading"/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import LoadingSpinner from './components/LoadingSpinner.vue';
 export default {
+  components: { LoadingSpinner },
   name: "app",
   data() {
     return {
       searchinput: null,
+      isLoading: false
     };
   },
   computed: {
@@ -50,21 +53,52 @@ export default {
         url: `http://127.0.0.1:8000/movies/search/${this.searchinput}/`,
       })
         .then((res) => {
-          this.$store.commit("movie/SEARCHRES", res.data)
+          this.$store.commit("movie/SEARCH_INPUT", this.searchinput)
+          this.$store.commit("movie/SEARCHRES", res.data);
         })
         .then(() => {
-          this.searchinput = null
-          if (this.$route.path !== '/search/res') {
-            this.$router.push({name:'searchview'})
+          this.searchinput = null;
+          if (this.$route.path !== "/search/res") {
+            this.$router.push({ name: "searchview" });
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    setLoading(isLoading) {
+      console.log('thisisloading', isLoading);
+      if (isLoading) {
+        this.isLoading = true
+        console.log('inIf', isLoading);
+      }
+      if (!isLoading) {
+        this.isLoading = false
+      }
+    }
   },
   created() {
     this.islogin();
+    axios.interceptors.request.use(
+      config =>{
+        this.setLoading(false)
+        return config
+      },
+      error => {
+        this.setLoading(false)
+        return Promise.reject(error)
+      }
+    ),
+      axios.interceptors.response.use(
+        response => {
+          this.setLoading(true)
+          return response
+        },
+        error => {
+          this.setLoading(false)
+          return Promise.reject(error)
+        }
+      )
   },
 };
 </script>
