@@ -1,11 +1,13 @@
 <!-- Spinner.vue -->
 <template>
-    <div class="lds-facebook" v-if="loading" >
-        <div>
-        </div>
-        <div>
-        </div>
-        <div>
+    <div style="width:100vw;height:100vh;">
+        <div class="lds-facebook" v-if="loading" >
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
         </div>
     </div>
 </template>
